@@ -10,7 +10,11 @@ const theme = createTheme({
     secondary: {
       main: '#f44336',
     },
-    spacing: 8
+    background: {
+      default: 'rgb(235, 237, 238)',
+      internal: '#ffffff'
+    },
+    spacing: 8 
   }
   /* 
     Em cada componente, o valor recebido no método theme.spacing() será multiplicado

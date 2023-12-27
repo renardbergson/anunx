@@ -1,7 +1,17 @@
 'use client'
 
 import { useTheme } from '@emotion/react'
-import { Container, Typography, Button, Card, CardActions, CardContent, CardMedia, Grid, IconButton } from '@mui/material'
+import { 
+  Container, 
+  Typography, 
+  Button, 
+  Card, 
+  CardActions, 
+  CardContent, 
+  CardMedia, 
+  Grid, 
+  IconButton 
+} from '@mui/material'
 
 import EditIcon from '@mui/icons-material/Edit'
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever'
@@ -14,7 +24,7 @@ const Dashboard = () => {
   return (
     <TemplateDefault>
       <Container maxWidth='sm' sx={{padding: theme.spacing(6, 0)}}>
-        <Typography component="h1" variant="h3" fontWeight="light" align='center'>
+        <Typography component="h1" variant="h3" fontWeight="light" align="center">
           Meus Anúncios
         </Typography>
 
@@ -43,8 +53,8 @@ const Dashboard = () => {
                 </Typography>
 
                 <Typography variant="body2" component="p" color="text.secondary">
-                A expressão Lorem ipsum é um texto padrão em latim 
-                utilizado na produção gráfica para preencher espaços.
+                  A expressão Lorem ipsum é um texto padrão em latim 
+                  utilizado na produção gráfica para preencher espaços.
                 </Typography>
               </CardContent>
 
@@ -78,8 +88,8 @@ const Dashboard = () => {
                 </Typography>
 
                 <Typography variant="body2" component="p" color="text.secondary">
-                A expressão Lorem ipsum é um texto padrão em latim 
-                utilizado na produção gráfica para preencher espaços.
+                  A expressão Lorem ipsum é um texto padrão em latim 
+                  utilizado na produção gráfica para preencher espaços.
                 </Typography>
               </CardContent>
 
@@ -113,8 +123,8 @@ const Dashboard = () => {
                 </Typography>
 
                 <Typography variant="body2" component="p" color="text.secondary">
-                A expressão Lorem ipsum é um texto padrão em latim 
-                utilizado na produção gráfica para preencher espaços.
+                  A expressão Lorem ipsum é um texto padrão em latim 
+                  utilizado na produção gráfica para preencher espaços.
                 </Typography>
               </CardContent>
 
