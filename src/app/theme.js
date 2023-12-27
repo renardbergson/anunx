@@ -2,19 +2,16 @@
 
 import { createTheme } from '@mui/material'
 
-import { purple } from '@mui/material/colors'
-
 const theme = createTheme({
   palette: {
     primary: {
-      main: purple[500],
+      main: '#000000',
     },
     secondary: {
       main: '#f44336',
     },
-  },
-
-  spacing: 8, 
+    spacing: 8
+  }
   /* 
     Em cada componente, o valor recebido no método theme.spacing() será multiplicado
     pelo valor atribuido na propriedade "spacing", na configuração do tema. O valor 8 

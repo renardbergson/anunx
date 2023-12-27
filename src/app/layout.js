@@ -3,8 +3,6 @@ import './globals.css'
 import theme from './theme'
 import { ThemeProvider } from '@mui/material'
 
-import Typography from '@mui/material/Typography'
-
 export const metadata = {
   title: 'Anunx - Negócios Online',
   description: 'A sua plataforma de compra e venda',
@@ -20,9 +18,7 @@ export default function RootLayout({ children }) {
 
       <body>
         <ThemeProvider theme={theme}>
-          <Typography>
             {children}
-          </Typography>
         </ThemeProvider>
       </body>
     </html>
