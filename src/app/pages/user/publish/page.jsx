@@ -13,14 +13,12 @@ import {
   Select,
   MenuItem,
   Button,
-  FormControl,
-  InputLabel,
-  OutlinedInput,
   InputAdornment
 } from '@mui/material'
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever'
 
 import TemplateDefault from '../../../templates/Default'
+import PageTitle from '@/app/components/PageTitle'
 
 
 const ThumbsWrapper = styled.div`
@@ -124,14 +122,7 @@ const Publish = () => {
 
   return (
     <TemplateDefault>
-      <Container maxWidth="sm" sx={{padding: theme.spacing(6, 0)}}>
-        <Typography component="h1" variant="h3" fontWeight="light" align="center">
-          Publicar Anúncio
-        </Typography>
-        <Typography component="h2" variant="h6" fontWeight="light" align="center">
-          Quanto mais detalhado, melhor!
-        </Typography>
-      </Container>
+      <PageTitle title={'Publicar Anúncio'} subtitle={'Quanto mais detalhado, melhor!'}/>
 
       <Container maxWidth="md">
         <Box sx={{background: theme.palette.secondary.main, padding: theme.spacing(3), marginBottom: theme.spacing(3)}}>

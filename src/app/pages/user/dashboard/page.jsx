@@ -17,21 +17,21 @@ import EditIcon from '@mui/icons-material/Edit'
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever'
 
 import TemplateDefault from '../../../templates/Default'
+import PageTitle from '@/app/components/PageTitle'
 
 const Dashboard = () => {
   const theme = useTheme()
 
   return (
     <TemplateDefault>
-      <Container maxWidth='sm' sx={{padding: theme.spacing(6, 0)}}>
-        <Typography component="h1" variant="h3" fontWeight="light" align="center">
-          Meus Anúncios
-        </Typography>
-
-        <Button variant='contained' color='primary' sx={{display: 'block', margin: '20px auto'}}>
-          Publicar novo anúncio
+      <PageTitle title={'Meus Anúncios'}>
+        <Button 
+          variant='contained' 
+          color='primary' 
+          sx={{display: 'block', margin: '20px auto'}}>
+            Publicar novo anúncio
         </Button>
-      </Container>
+      </PageTitle>
 
       <Container maxWidth="md">
         <Grid container spacing={4}>
