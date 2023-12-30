@@ -5,7 +5,19 @@ import { useDropzone } from 'react-dropzone'
 import styled from 'styled-components'
 
 import { useTheme } from '@emotion/react'
-import { Container, Typography, Box, TextField, Select, MenuItem, Button } from '@mui/material'
+import {
+  Container,
+  Typography,
+  Box,
+  TextField,
+  Select,
+  MenuItem,
+  Button,
+  FormControl,
+  InputLabel,
+  OutlinedInput,
+  InputAdornment
+} from '@mui/material'
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever'
 
 import TemplateDefault from '../../../templates/Default'
@@ -213,6 +225,28 @@ const Publish = () => {
             multiline
             rows={4}
             fullWidth
+          />
+        </Box>
+      </Container>
+
+      <Container maxWidth="md">
+        <Box sx={{background: theme.palette.secondary.main, padding: theme.spacing(3), marginBottom: theme.spacing(3)}}>
+          <Typography component="h6" variant="body2" fontWeight="bold">
+            Preço
+          </Typography>
+
+          <TextField
+            size="small"
+            type="number"
+            variant="standard"
+            fullWidth
+            InputProps={{
+              startAdornment: <InputAdornment position="start">R$</InputAdornment>,
+            }}
+            sx={{
+              "& input::-webkit-outer-spin-button, & input::-webkit-inner-spin-button": 
+              {display: "none"}, "& input[type=number]": {MozAppearance: "textfield"}
+            }}
           />
         </Box>
       </Container>
