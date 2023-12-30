@@ -8,11 +8,10 @@ const theme = createTheme({
       main: '#000000',
     },
     secondary: {
-      main: '#f44336',
+      main: '#ffffff',
     },
     background: {
       default: 'rgb(235, 237, 238)',
-      internal: '#ffffff'
     },
     spacing: 8 
   }
