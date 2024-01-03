@@ -20,6 +20,7 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever'
 
 import TemplateDefault from '../../../templates/Default'
 import PageTitle from '@/app/components/PageTitle'
+import Link from 'next/link'
 
 
 const ThumbsWrapper = styled.div`
@@ -278,14 +279,16 @@ const Publish = () => {
 
       <Container maxWidth="md">
         <Box textAlign="right">
-          <Button 
-            variant='contained' 
-            color='primary' 
-            size="small"
-            sx={{marginBottom: theme.spacing(3)}}
-          >
-            Publicar anúncio
-          </Button>
+          <Link href="#">
+            <Button 
+              variant='contained' 
+              color='primary' 
+              size="small"
+              sx={{marginBottom: theme.spacing(3)}}
+            >
+              Publicar anúncio
+            </Button>
+          </Link>
         </Box>
       </Container>
     </TemplateDefault>

@@ -1,14 +1,8 @@
 'use client'
 
-import { useTheme } from '@emotion/react'
 import { 
-  Container, 
-  Typography, 
+  Container,
   Button, 
-  Card, 
-  CardActions, 
-  CardContent, 
-  CardMedia, 
   Grid, 
   IconButton 
 } from '@mui/material'
@@ -18,47 +12,38 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever'
 
 import TemplateDefault from '../../../templates/Default'
 import PageTitle from '@/app/components/PageTitle'
+import ProductCard from '@/app/components/ProductCard'
+import Link from 'next/link'
 
 const Dashboard = () => {
-  const theme = useTheme()
-
   return (
     <TemplateDefault>
       <PageTitle title={'Meus Anúncios'}>
-        <Button 
-          variant='contained' 
-          color='primary' 
-          sx={{display: 'block', margin: '20px auto'}}>
-            Publicar novo anúncio
-        </Button>
+        <Link href="/pages/user/publish" 
+          style={{
+            textDecoration: 'none',
+            display: 'block',
+            width: 'fit-content',
+            margin: '0 auto'
+          }}>
+          <Button 
+            variant='contained' 
+            color='primary' 
+            sx={{display: 'block', margin: '20px auto'}}>
+              Publicar novo anúncio
+          </Button>
+        </Link>
       </PageTitle>
 
       <Container maxWidth="md">
         <Grid container spacing={4}>
-          <Grid item xs={12} sm={6} md={4}>
-            <Card>
-              <CardMedia
-                sx={{ paddingTop: '60%' }}
-                image="https://source.unsplash.com/random"
-                title="Título da Imagem"
-              />
-
-              <CardContent>
-                <Typography gutterBottom variant="h5" component="h2">
-                  Título do Anúncio
-                </Typography>
-                
-                <Typography variant="body1" component="h3" color="text.secondary" sx={{marginBottom: theme.spacing()}}>
-                  R$ 60,00
-                </Typography>
-
-                <Typography variant="body2" component="p" color="text.secondary">
-                  A expressão Lorem ipsum é um texto padrão em latim 
-                  utilizado na produção gráfica para preencher espaços.
-                </Typography>
-              </CardContent>
-
-              <CardActions>
+          <ProductCard 
+            title={'Título do Anúncio'}
+            subtitle={'R$ 60,00'}
+            image={'https://source.unsplash.com/random'}
+            description={'A expressão Lorem ipsum é um texto padrão em latim utilizado na produção gráfica para preencher espaços.'}
+            actions={
+              <>
                 <IconButton color='primary'>
                   <EditIcon sx={{fontSize: '20px'}}/>
                 </IconButton>
@@ -66,34 +51,17 @@ const Dashboard = () => {
                 <IconButton size='small' color='primary'>
                   <DeleteForeverIcon sx={{fontSize: '20px'}}/>
                 </IconButton>
-              </CardActions>
-            </Card>
-          </Grid>
+              </>
+            }
+          />
 
-          <Grid item xs={12} sm={6} md={4}>
-            <Card>
-              <CardMedia
-                sx={{ paddingTop: '60%' }}
-                image="https://source.unsplash.com/random"
-                title="Título da Imagem"
-              />
-
-              <CardContent>
-                <Typography gutterBottom variant="h5" component="h2">
-                  Título do Anúncio
-                </Typography>
-                
-                <Typography variant="body1" component="h3" color="text.secondary" sx={{marginBottom: theme.spacing()}}>
-                  R$ 60,00
-                </Typography>
-
-                <Typography variant="body2" component="p" color="text.secondary">
-                  A expressão Lorem ipsum é um texto padrão em latim 
-                  utilizado na produção gráfica para preencher espaços.
-                </Typography>
-              </CardContent>
-
-              <CardActions>
+          <ProductCard 
+            title={'Título do Anúncio'}
+            subtitle={'R$ 60,00'}
+            image={'https://source.unsplash.com/random'}
+            description={'A expressão Lorem ipsum é um texto padrão em latim utilizado na produção gráfica para preencher espaços.'}
+            actions={
+              <>
                 <IconButton color='primary'>
                   <EditIcon sx={{fontSize: '20px'}}/>
                 </IconButton>
@@ -101,34 +69,17 @@ const Dashboard = () => {
                 <IconButton size='small' color='primary'>
                   <DeleteForeverIcon sx={{fontSize: '20px'}}/>
                 </IconButton>
-              </CardActions>
-            </Card>
-          </Grid>
+              </>
+            }
+          />
 
-          <Grid item xs={12} sm={6} md={4}>
-            <Card>
-              <CardMedia
-                sx={{ paddingTop: '60%' }}
-                image="https://source.unsplash.com/random"
-                title="Título da Imagem"
-              />
-
-              <CardContent>
-                <Typography gutterBottom variant="h5" component="h2">
-                  Título do Anúncio
-                </Typography>
-                
-                <Typography variant="body1" component="h3" color="text.secondary" sx={{marginBottom: theme.spacing()}}>
-                  R$ 60,00
-                </Typography>
-
-                <Typography variant="body2" component="p" color="text.secondary">
-                  A expressão Lorem ipsum é um texto padrão em latim 
-                  utilizado na produção gráfica para preencher espaços.
-                </Typography>
-              </CardContent>
-
-              <CardActions>
+          <ProductCard 
+            title={'Título do Anúncio'}
+            subtitle={'R$ 60,00'}
+            image={'https://source.unsplash.com/random'}
+            description={'A expressão Lorem ipsum é um texto padrão em latim utilizado na produção gráfica para preencher espaços.'}
+            actions={
+              <>
                 <IconButton color='primary'>
                   <EditIcon sx={{fontSize: '20px'}}/>
                 </IconButton>
@@ -136,9 +87,9 @@ const Dashboard = () => {
                 <IconButton size='small' color='primary'>
                   <DeleteForeverIcon sx={{fontSize: '20px'}}/>
                 </IconButton>
-              </CardActions>
-            </Card>
-          </Grid>
+              </>
+            }
+          />
         </Grid>
       </Container>
     </TemplateDefault>
