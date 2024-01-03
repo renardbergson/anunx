@@ -1,6 +1,8 @@
 import { Container, Divider, Grid, Typography, useTheme } from "@mui/material"
 import Link from "next/link"
 
+import FooterLink from "../components/FooterLink"
+
 const Footer = () => {
   const theme = useTheme()
 
@@ -9,65 +11,13 @@ const Footer = () => {
       <Divider />
 
       <Grid container sx={{padding: `${theme.spacing(6)} 0`}} spacing={3}>
-        <Grid item xs={6} sm={3} sx={{textAlign: 'center'}}>
-          <Link href="#" 
-            style={{
-              textDecoration: 'none', 
-              color: theme.palette.primary.main, 
-              display: 'block', 
-              margin: '0 auto',
-              width: 'fit-content'
-            }}>
-            <Typography variant="button">
-              Ajuda e Contato
-            </Typography>
-          </Link>
-        </Grid>
+        <FooterLink text={'Ajuda e Contato'}/>
 
-        <Grid item xs={6} sm={3} sx={{textAlign: 'center'}}>
-          <Link href="#" 
-          style={{
-              textDecoration: 'none', 
-              color: theme.palette.primary.main,
-              display: 'block', 
-              margin: '0 auto',
-              width: 'fit-content'
-            }}>
-            <Typography variant="button">
-              Dicas de Segurança
-            </Typography>
-          </Link>
-        </Grid>
+        <FooterLink text={'Dicas de Segurança'}/>
 
-        <Grid item xs={6} sm={3} sx={{textAlign: 'center'}}>
-          <Link href="#" 
-          style={{
-            textDecoration: 'none', 
-            color: theme.palette.primary.main,
-            display: 'block', 
-            margin: '0 auto',
-            width: 'fit-content'
-          }}>
-            <Typography variant="button">
-              Anunciar e Vender
-            </Typography>
-          </Link>
-        </Grid>
+        <FooterLink text={'Anunciar e Vender'}/>
 
-        <Grid item xs={6} sm={3} sx={{textAlign: 'center'}}>
-          <Link href="#" 
-          style={{
-            textDecoration: 'none', 
-            color: theme.palette.primary.main,
-            display: 'block', 
-            margin: '0 auto',
-            width: 'fit-content'
-          }}>
-            <Typography variant="button">
-              Plano Profissional
-            </Typography>
-          </Link>
-        </Grid>
+        <FooterLink text={'Plano Profissional'}/>
       </Grid>
     </Container>
   )
