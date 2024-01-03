@@ -40,7 +40,7 @@ const Dashboard = () => {
           <ProductCard 
             title={'Título do Anúncio'}
             subtitle={'R$ 60,00'}
-            image={'https://source.unsplash.com/random'}
+            image={'https://source.unsplash.com/random?a'}
             description={'A expressão Lorem ipsum é um texto padrão em latim utilizado na produção gráfica para preencher espaços.'}
             actions={
               <>
@@ -58,7 +58,7 @@ const Dashboard = () => {
           <ProductCard 
             title={'Título do Anúncio'}
             subtitle={'R$ 60,00'}
-            image={'https://source.unsplash.com/random'}
+            image={'https://source.unsplash.com/random?b'}
             description={'A expressão Lorem ipsum é um texto padrão em latim utilizado na produção gráfica para preencher espaços.'}
             actions={
               <>
@@ -76,7 +76,7 @@ const Dashboard = () => {
           <ProductCard 
             title={'Título do Anúncio'}
             subtitle={'R$ 60,00'}
-            image={'https://source.unsplash.com/random'}
+            image={'https://source.unsplash.com/random?c'}
             description={'A expressão Lorem ipsum é um texto padrão em latim utilizado na produção gráfica para preencher espaços.'}
             actions={
               <>
