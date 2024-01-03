@@ -1,6 +1,7 @@
 import { useTheme } from '@emotion/react'
 
 import Header from '../partials/Header'
+import Footer from '../partials/Footer'
 
 const Default = ({ children }) => {
   const theme = useTheme()
@@ -11,7 +12,7 @@ const Default = ({ children }) => {
 
       {children}
 
-      <footer>Rodapé</footer>
+      <Footer />
     </div>
   )
 }
