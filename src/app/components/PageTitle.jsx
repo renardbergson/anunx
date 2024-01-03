@@ -1,11 +1,11 @@
-import { useTheme } from '@emotion/react'
+import { useTheme } from "@emotion/react"
 import { Container,Typography } from "@mui/material"
 
 const PageTitle = ({ title, subtitle, children }) => {
   const theme = useTheme()
 
   return (
-    <Container maxWidth='sm' sx={{padding: theme.spacing(6, 0)}}>
+    <Container maxWidth='sm' sx={{marginBottom: `${theme.spacing(7)}`}}>
       <Typography component="h1" variant="h3" fontWeight="light" align="center">
         {title}
       </Typography>
