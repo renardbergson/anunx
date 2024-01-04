@@ -2,19 +2,15 @@
 
 import {
   useTheme,
-  Paper,
-  InputBase,
-  IconButton,
   Container,
   Grid,
   Typography,
   Box
 } from '@mui/material'
 
-import SearchIcon from '@mui/icons-material/Search'
-
 import TemplateDefault from './templates/Default'
 import PageTitle from './components/PageTitle'
+import SearchBar from './components/SearchBar'
 import ProductCard from './components/ProductCard'
 
 const Home = () => {
@@ -23,25 +19,7 @@ const Home = () => {
   return (
     <TemplateDefault>
       <PageTitle title={'Bem-vindo ao Anunx!'} subtitle={'O que está procurando?'}>
-        <Paper 
-          sx={{
-            display: 'flex', 
-            justifyContent: 'space-between',
-            padding: theme.spacing(1),
-            borderRadius: '10px',
-            paddingLeft: theme.spacing(2),
-            margin: '20px 0'
-          }}>
-          
-          <InputBase 
-            placeholder="Ex.: Iphone 13"
-            fullWidth
-            sx={{width: '95%'}}
-          />
-          <IconButton>
-            <SearchIcon />
-          </IconButton>
-        </Paper>
+        <SearchBar />
       </PageTitle>
 
       <Box textAlign="center">
