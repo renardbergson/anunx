@@ -2,7 +2,6 @@
 
 import {
   useTheme,
-  Container,
   Grid,
   Typography,
   Box
@@ -11,7 +10,9 @@ import {
 import TemplateDefault from './templates/Default'
 import PageTitle from './components/PageTitle'
 import SearchBar from './components/SearchBar'
+import ProductGridContainer from './components/ProductGridContainer'
 import ProductCard from './components/ProductCard'
+import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
 
 const Home = () => {
   const theme = useTheme()
@@ -26,17 +27,21 @@ const Home = () => {
         <Typography
           component="h3"
           variant='h5'
-          fontWeight="light"
           sx={{
             marginBottom: theme.spacing(3),
             letterSpacing: '1px'
-          }}
-          >
-            Destaques
+          }}> 
+          
+          Destaques
+
+          <AutoAwesomeIcon 
+            fontSize='small' 
+            sx={{marginLeft: theme.spacing(1)}}
+          />
         </Typography>
       </Box>
 
-      <Container maxWidth="md">
+      <ProductGridContainer>
         <Grid container spacing={4}>
           <ProductCard 
             title={'Título do Anúncio'}
@@ -59,7 +64,7 @@ const Home = () => {
             description={'A expressão Lorem ipsum é um texto padrão em latim utilizado na produção gráfica para preencher espaços.'}
           />
         </Grid>
-      </Container>
+      </ProductGridContainer>
     </TemplateDefault>
   )
 }

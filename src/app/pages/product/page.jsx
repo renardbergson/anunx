@@ -2,7 +2,6 @@
 'use client'
 
 import { useTheme } from "@emotion/react"
-import TemplateDefault from "@/app/templates/Default"
 import {
   Avatar,
   Box,
@@ -10,12 +9,13 @@ import {
   CardHeader,
   CardMedia,
   Chip,
-  Container,
   Grid,
   Typography
 } from "@mui/material"
 import Carousel from "react-material-ui-carousel"
 
+import TemplateDefault from "@/app/templates/Default"
+import ProductGridContainer from "@/app/components/ProductGridContainer"
 
 const ProductPage = () => {
   const theme = useTheme()
@@ -34,7 +34,7 @@ const ProductPage = () => {
 
   return (
     <TemplateDefault>
-      <Container maxWidth="md">
+      <ProductGridContainer>
         <Grid container spacing={3}> 
           <Grid item xs={12} md={8}>
             <Box sx={styles.box}>
@@ -125,7 +125,7 @@ const ProductPage = () => {
             </Box>
           </Grid>
         </Grid>
-      </Container>
+      </ProductGridContainer>
     </TemplateDefault>
   )
 }

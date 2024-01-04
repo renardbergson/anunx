@@ -1,7 +1,6 @@
 'use client'
 
 import { 
-  Container,
   Button, 
   Grid, 
   IconButton 
@@ -12,6 +11,7 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever'
 
 import TemplateDefault from '../../../templates/Default'
 import PageTitle from '@/app/components/PageTitle'
+import ProductGridContainer from '@/app/components/ProductGridContainer'
 import ProductCard from '@/app/components/ProductCard'
 import Link from 'next/link'
 
@@ -35,7 +35,7 @@ const Dashboard = () => {
         </Link>
       </PageTitle>
 
-      <Container maxWidth="md">
+      <ProductGridContainer>
         <Grid container spacing={4}>
           <ProductCard 
             title={'Título do Anúncio'}
@@ -91,7 +91,7 @@ const Dashboard = () => {
             }
           />
         </Grid>
-      </Container>
+      </ProductGridContainer>
     </TemplateDefault>
   )
 }

@@ -1,7 +1,9 @@
 'use client'
-import { useTheme, Container, Typography, Box, Grid } from "@mui/material"
+
+import { useTheme, Container, Typography, Grid } from "@mui/material"
 import TemplateDefault from "@/app/templates/Default"
 import SearchBar from "@/app/components/SearchBar"
+import ProductGridContainer from "@/app/components/ProductGridContainer"
 import ProductCard from "@/app/components/ProductCard"
 
 const ProductSearch = () => {
@@ -13,9 +15,8 @@ const ProductSearch = () => {
         <SearchBar />
       </Container>
 
-      <Container 
-        maxWidth="md" 
-        sx={{
+      <ProductGridContainer 
+        styles={{
           backgroundColor: theme.palette.secondary.main, 
           padding: '20px',
           borderRadius: '5px'
@@ -23,12 +24,12 @@ const ProductSearch = () => {
       >
         <Grid container spacing={4}>
           <Grid item xs={12}>
-            <Typography component="h5" variant="h5">
-              Anúncios
+            <Typography component="h1" variant="h5" letterSpacing={1}>
+              Resultado de Busca
             </Typography>
 
-            <Typography component="h6" variant="body1">
-              Encontrados X anúncios com base na busca atual
+            <Typography component="h2" variant="body1">
+              Exibindo X anúncios com base na busca atual
             </Typography>
           </Grid>
 
@@ -50,7 +51,7 @@ const ProductSearch = () => {
             image={'https://source.unsplash.com/random?c'}
           />
         </Grid>
-      </Container>
+      </ProductGridContainer>
     </TemplateDefault>
   )
 }

@@ -14,7 +14,7 @@ const ProductCard = ({ title, subtitle, image, description, actions }) => {
 
   return (
     <Grid item xs={12} sm={6} md={4}>
-      <Card>
+      <Card sx={{borderRadius: '5px'}}>
         <CardMedia
           sx={{ paddingTop: '60%' }}
           image={image}
