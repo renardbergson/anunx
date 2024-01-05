@@ -1,6 +1,8 @@
 'use client'
 
 import React, { useState } from 'react'
+import { useFormik } from 'formik'
+import newProductFormValidation from '@/app/validations/newProductFormValidation'
 import { useDropzone } from 'react-dropzone'
 import styled from 'styled-components'
 
@@ -15,12 +17,10 @@ import {
   Button,
   InputAdornment
 } from '@mui/material'
-
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever'
 
 import TemplateDefault from '../../../templates/Default'
 import PageTitle from '@/app/components/PageTitle'
-import Link from 'next/link'
 
 
 const ThumbsWrapper = styled.div`
@@ -108,6 +108,16 @@ const Publish = () => {
       ])
     }
   })
+
+  const formik = useFormik({
+    initialValues: {
+      title: ''
+    },
+    validationSchema: newProductFormValidation,
+    onSubmit: values => {
+      console.log(JSON.stringify(values))
+    },
+  })
   
   const [images, setImages] = useState([])
 
@@ -126,161 +136,168 @@ const Publish = () => {
     <TemplateDefault>
       <PageTitle title={'Publicar Anúncio'} subtitle={'Quanto mais detalhado, melhor!'}/>
 
-      <Container maxWidth="md">
-        <Box sx={{background: theme.palette.secondary.main, padding: theme.spacing(3), marginBottom: theme.spacing(3)}}>
+      <form onSubmit={formik.handleSubmit}>
+        <Container maxWidth="md">
+          <Box sx={{background: theme.palette.secondary.main, padding: theme.spacing(3), marginBottom: theme.spacing(3)}}>
+            <Typography component="h6" variant="body2" fontWeight="bold">
+              Título do Anúncio
+            </Typography>
+            
+            <TextField 
+              name="title"
+              type="text"
+              label="ex.: playstation 5 - mídia física" 
+              variant="standard" 
+              size="small" 
+              fullWidth
+              onChange={formik.handleChange}
+              value={formik.values.title}
+              error={Boolean(formik.errors.title)}
+              helperText={formik.errors.title}
+            />
+
+            <br /> <br /> <br />
+
+            <Typography component="h6" variant="body2" fontWeight="bold">
+              Categoria
+            </Typography>
+
+            <Select
+              size="small"
+              variant="standard"
+              fullWidth
+              displayEmpty
+              value={category}
+              onChange={handleChangeCategory}
+            >
+              <MenuItem value="">Selecione</MenuItem>
+              <MenuItem value="Games e Consoles">Games e Consoles</MenuItem>
+              <MenuItem value="Veículos">Veículos</MenuItem>
+              <MenuItem value="Esportes">Esportes</MenuItem>
+            </Select>
+          </Box>
+        </Container>
+
+        <Container maxWidth="md">
+          <Box sx={{background: theme.palette.secondary.main, padding: theme.spacing(3), marginBottom: theme.spacing(3)}}>
+            <Typography component="h6" variant="body2" fontWeight="bold">
+              Imagens
+            </Typography>
+
+            <Typography component="span" variant="body2" fontWeight="light" color='primary'>
+              A primeira imagem será a foto principal do seu anúncio
+            </Typography>
+
+            <ThumbsWrapper>
+              <Dropzone {...getRootProps()}>
+                <input {...getInputProps()}/>
+
+                <Typography component="span" variant="body2">
+                  Clique para adicionar ou arraste as imagens.
+                </Typography>
+              </Dropzone>
+
+              {
+                images.map((image, index) => {
+                  return (
+                    <Thumb key={image.name} style={{backgroundImage: `url(${image.preview})`}}>
+                      <Mask className='mask' onClick={() => handleOnRemoveImage(image.name)}>
+                        <DeleteForeverIcon className='trashIcon' color="secondary" />
+                        
+                        {index === 0 ?                       
+                          <MainImageText>
+                            <Typography variant="caption" color='secondary'>
+                              Principal
+                            </Typography>
+                          </MainImageText>
+                          : null
+                        }
+                      </Mask>
+                    </Thumb>
+                  )
+                })
+              }
+            </ThumbsWrapper>
+          </Box>
+        </Container>
+
+        <Container maxWidth="md">
+          <Box sx={{background: theme.palette.secondary.main, padding: theme.spacing(3), marginBottom: theme.spacing(3)}}>
+            <Typography component="h6" variant="body2" fontWeight="bold">
+              Descricão
+            </Typography>
+
+            <Typography component="div" variant="body2" fontWeight="light" color='primary'>
+              Escreva os detalhes daquilo que está anunciando
+            </Typography>
+
+            <TextField 
+              multiline
+              rows={4}
+              fullWidth
+            />
+          </Box>
+        </Container>
+
+        <Container maxWidth="md">
+          <Box sx={{background: theme.palette.secondary.main, padding: theme.spacing(3), marginBottom: theme.spacing(3)}}>
+            <Typography component="h6" variant="body2" fontWeight="bold">
+              Preço
+            </Typography>
+
+            <TextField
+              size="small"
+              type="number"
+              variant="standard"
+              fullWidth
+              InputProps={{
+                startAdornment: <InputAdornment position="start">R$</InputAdornment>,
+              }}
+              sx={{
+                "& input::-webkit-outer-spin-button, & input::-webkit-inner-spin-button": 
+                {display: "none"}, "& input[type=number]": {MozAppearance: "textfield"}
+              }}
+            />
+          </Box>
+        </Container>
+
+        <Container maxWidth="md">
+          <Box sx={{background: theme.palette.secondary.main, padding: theme.spacing(3), marginBottom: theme.spacing(3)}}>
           <Typography component="h6" variant="body2" fontWeight="bold">
-            Título do Anúncio
-          </Typography>
-          
-          <TextField 
-            label="ex.: playstation 5 - mídia física" 
-            variant="standard" 
-            size="small" 
-            fullWidth
-          />
+              Dados de Contato
+            </Typography>
 
-          <br /> <br /> <br />
+            <TextField 
+              label="Seu nome"
+              size="small"
+              fullWidth
+              variant="standard"
+            />
 
-          <Typography component="h6" variant="body2" fontWeight="bold">
-            Categoria
-          </Typography>
+            <br /> <br />
 
-          <Select
-            size="small"
-            variant="standard"
-            fullWidth
-            displayEmpty
-            value={category}
-            onChange={handleChangeCategory}
-          >
-            <MenuItem value="">Selecione</MenuItem>
-            <MenuItem value="Games e Consoles">Games e Consoles</MenuItem>
-            <MenuItem value="Veículos">Veículos</MenuItem>
-            <MenuItem value="Esportes">Esportes</MenuItem>
-          </Select>
-        </Box>
-      </Container>
+            <TextField 
+              label="Seu e-mail"
+              size="small"
+              fullWidth
+              variant="standard"
+            />
 
-      <Container maxWidth="md">
-        <Box sx={{background: theme.palette.secondary.main, padding: theme.spacing(3), marginBottom: theme.spacing(3)}}>
-          <Typography component="h6" variant="body2" fontWeight="bold">
-            Imagens
-          </Typography>
+            <br /> <br />
 
-          <Typography component="span" variant="body2" fontWeight="light" color='primary'>
-            A primeira imagem será a foto principal do seu anúncio
-          </Typography>
+            <TextField 
+              label="Seu telefone"
+              size="small"
+              fullWidth
+              variant="standard"
+            />
+          </Box>
+        </Container>
 
-          <ThumbsWrapper>
-            <Dropzone {...getRootProps()}>
-              <input {...getInputProps()}/>
-
-              <Typography component="span" variant="body2">
-                Clique para adicionar ou arraste as imagens.
-              </Typography>
-            </Dropzone>
-
-            {
-              images.map((image, index) => {
-                return (
-                  <Thumb key={image.name} style={{backgroundImage: `url(${image.preview})`}}>
-                    <Mask className='mask' onClick={() => handleOnRemoveImage(image.name)}>
-                      <DeleteForeverIcon className='trashIcon' color="secondary" />
-                      
-                      {index === 0 ?                       
-                        <MainImageText>
-                          <Typography variant="caption" color='secondary'>
-                            Principal
-                          </Typography>
-                        </MainImageText>
-                        : null
-                      }
-                    </Mask>
-                  </Thumb>
-                )
-              })
-            }
-          </ThumbsWrapper>
-        </Box>
-      </Container>
-
-      <Container maxWidth="md">
-        <Box sx={{background: theme.palette.secondary.main, padding: theme.spacing(3), marginBottom: theme.spacing(3)}}>
-          <Typography component="h6" variant="body2" fontWeight="bold">
-            Descricão
-          </Typography>
-
-          <Typography component="div" variant="body2" fontWeight="light" color='primary'>
-            Escreva os detalhes daquilo que está anunciando
-          </Typography>
-
-          <TextField 
-            multiline
-            rows={4}
-            fullWidth
-          />
-        </Box>
-      </Container>
-
-      <Container maxWidth="md">
-        <Box sx={{background: theme.palette.secondary.main, padding: theme.spacing(3), marginBottom: theme.spacing(3)}}>
-          <Typography component="h6" variant="body2" fontWeight="bold">
-            Preço
-          </Typography>
-
-          <TextField
-            size="small"
-            type="number"
-            variant="standard"
-            fullWidth
-            InputProps={{
-              startAdornment: <InputAdornment position="start">R$</InputAdornment>,
-            }}
-            sx={{
-              "& input::-webkit-outer-spin-button, & input::-webkit-inner-spin-button": 
-              {display: "none"}, "& input[type=number]": {MozAppearance: "textfield"}
-            }}
-          />
-        </Box>
-      </Container>
-
-      <Container maxWidth="md">
-        <Box sx={{background: theme.palette.secondary.main, padding: theme.spacing(3), marginBottom: theme.spacing(3)}}>
-        <Typography component="h6" variant="body2" fontWeight="bold">
-            Dados de Contato
-          </Typography>
-
-          <TextField 
-            label="Seu nome"
-            size="small"
-            fullWidth
-            variant="standard"
-          />
-
-          <br /> <br />
-
-          <TextField 
-            label="Seu e-mail"
-            size="small"
-            fullWidth
-            variant="standard"
-          />
-
-          <br /> <br />
-
-          <TextField 
-            label="Seu telefone"
-            size="small"
-            fullWidth
-            variant="standard"
-          />
-        </Box>
-      </Container>
-
-      <Container maxWidth="md">
-        <Box textAlign="right">
-          <Link href="#">
+        <Container maxWidth="md">
+          <Box textAlign="right">
             <Button 
+              type="submit"
               variant='contained' 
               color='primary' 
               size="small"
@@ -288,9 +305,9 @@ const Publish = () => {
             >
               Publicar anúncio
             </Button>
-          </Link>
-        </Box>
-      </Container>
+          </Box>
+        </Container>
+      </form>
     </TemplateDefault>
   )
 }
