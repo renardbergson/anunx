@@ -15,7 +15,9 @@ import {
   Select,
   MenuItem,
   Button,
-  InputAdornment
+  InputAdornment,
+  FormControl,
+  FormHelperText
 } from '@mui/material'
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever'
 
@@ -78,21 +80,6 @@ const MainImageText = styled.span`
 const Publish = () => {
   const theme = useTheme()
 
-  // react dropzone retorna duas funções
-  // use dropzone recebe um objeto
-  // a primeira será passada para a área clicável/arrastável
-  // a segunda será passada para um input, inserido dentro da área clicável/arrastável
-  // a chave "accept" seta: tipo de arquivo/extensão aceitável (neste caso, img de qq extensão)
-  // a chave "onDrop" recebe a funcão que será executada toda vez que um arquivo for importado
-  // selectedFiles é um array com as imagens selecionadas. É preciso inserir ele em um estado
-  // com map, estamos retornando para o novo array "filePackage" um objeto
-  /* 
-    o método Object.assign recebe pelo menos duas propriedades, o primeiro será o objeto ALVO,
-    o segundo ou os demais serão os objetos atribuidos/atualizados no alvo. Se houver objetos com 
-    chaves repetidas, ele atualizará o alvo com a chave repetida mais próxima dos parênteses, se 
-    não houver, todas as chaves serão atribuidos ao objeto alvo. Funciona igual à atualização de
-    dados usando o spread operator.
-  */
   const { getRootProps, getInputProps } = useDropzone({
     accept: 'image/*',
     onDrop: (selectedFiles) => {
@@ -111,21 +98,17 @@ const Publish = () => {
 
   const formik = useFormik({
     initialValues: {
-      title: ''
+      title: '',
+      category: '',
     },
     validationSchema: newProductFormValidation,
     onSubmit: values => {
       console.log(JSON.stringify(values))
     },
+    validateOnChange: false
   })
   
   const [images, setImages] = useState([])
-
-  const [category, setCategory] = useState('')
-
-  const handleChangeCategory = e => {
-    setCategory(e.target.value)
-  }
 
   const handleOnRemoveImage = imageName => {
     const newImagesState = images.filter(image => image.name != imageName)
@@ -145,7 +128,6 @@ const Publish = () => {
             
             <TextField 
               name="title"
-              type="text"
               label="ex.: playstation 5 - mídia física" 
               variant="standard" 
               size="small" 
@@ -162,19 +144,21 @@ const Publish = () => {
               Categoria
             </Typography>
 
-            <Select
-              size="small"
-              variant="standard"
-              fullWidth
-              displayEmpty
-              value={category}
-              onChange={handleChangeCategory}
-            >
-              <MenuItem value="">Selecione</MenuItem>
-              <MenuItem value="Games e Consoles">Games e Consoles</MenuItem>
-              <MenuItem value="Veículos">Veículos</MenuItem>
-              <MenuItem value="Esportes">Esportes</MenuItem>
-            </Select>
+            <FormControl error={Boolean(formik.errors.category)} fullWidth>
+              <Select
+                name="category"
+                size="small"
+                variant="standard"
+                fullWidth
+                onChange={formik.handleChange}
+                value={formik.values.category}
+              >
+                <MenuItem value="Games e Consoles">Games e Consoles</MenuItem>
+                <MenuItem value="Veículos">Veículos</MenuItem>
+                <MenuItem value="Esportes">Esportes</MenuItem>
+              </Select>
+              <FormHelperText sx={{marginLeft: 0}}> {formik.errors.category} </FormHelperText>
+            </FormControl>
           </Box>
         </Container>
 

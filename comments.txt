@@ -1,0 +1,32 @@
+============ Comentários referentes ao React Dropzone, presente na page "publish" ============
+
+react dropzone retorna duas funções
+use dropzone recebe um objeto
+a primeira será passada para a área clicável/arrastável
+a segunda será passada para um input, inserido dentro da área clicável/arrastável
+a chave "accept" seta: tipo de arquivo/extensão aceitável (neste caso, img de qq extensão)
+a chave "onDrop" recebe a funcão que será executada toda vez que um arquivo for importado
+selectedFiles é um array com as imagens selecionadas. É preciso inserir ele em um estado
+com map, estamos retornando para o novo array "filePackage" um objeto
+ 
+o método Object.assign recebe pelo menos duas propriedades, o primeiro será o objeto ALVO,
+o segundo ou os demais serão os objetos atribuidos/atualizados no alvo. Se houver objetos com 
+chaves repetidas, ele atualizará o alvo com a chave repetida mais próxima dos parênteses, se 
+não houver, todas as chaves serão atribuidos ao objeto alvo. Funciona igual à atualização de
+dados usando o spread operator.
+
+============= Comentários referentes ao uso do Formik, para validar formulários ==============
+
+para usarmos a validação nativa do Formik, sem Yup, podemos proceder assim:
+
+const validate = values => {
+  const errors = {}
+
+  if (!values.title) {
+    errors.title = 'campo obrigatório!'
+  }
+
+  return errors
+}
+
+"validate" seria um campo necessário nas configurações do hook useFormik, substituindo "validationSchema"
