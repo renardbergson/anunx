@@ -87,6 +87,10 @@ const styles = {
   },
   inputHelperText: {
     marginLeft: 0
+  },
+  inputTypeNumber: {
+    "& input::-webkit-outer-spin-button, & input::-webkit-inner-spin-button": 
+    {display: "none"}, "& input[type=number]": {MozAppearance: "textfield"}
   }
 }
 
@@ -114,10 +118,14 @@ const Publish = () => {
       title: '',
       category: '',
       description: '',
+      price: '',
+      name: '',
+      email: '',
+      phone: '',
     },
     validationSchema: newProductFormValidation,
     onSubmit: values => {
-      console.log(JSON.stringify(values))
+      console.log(values)
     },
     validateOnChange: false
   })
@@ -237,57 +245,73 @@ const Publish = () => {
         </Container>
 
         <Container maxWidth="md">
-          <Box sx={{background: theme.palette.secondary.main, padding: theme.spacing(3), marginBottom: theme.spacing(3)}}>
-            <Typography component="h6" variant="body2" fontWeight="bold">
-              Preço
-            </Typography>
-
-            <TextField
-              size="small"
-              type="number"
-              variant="standard"
-              fullWidth
-              InputProps={{
-                startAdornment: <InputAdornment position="start">R$</InputAdornment>,
-              }}
-              sx={{
-                "& input::-webkit-outer-spin-button, & input::-webkit-inner-spin-button": 
-                {display: "none"}, "& input[type=number]": {MozAppearance: "textfield"}
-              }}
-            />
+          <Box sx={{background: theme.palette.secondary.main, padding: theme.spacing(3), marginBottom: theme.spacing(3)}}>            
+            <FormControl error={Boolean(formik.errors.price)} fullWidth>
+              <InputLabel sx={styles.inputLabel}>Preço</InputLabel>
+              <Input
+                name="price"
+                type="number"
+                value={formik.values.price}
+                onChange={formik.handleChange}
+                startAdornment= {<InputAdornment position="start">R$</InputAdornment>}
+                sx={styles.inputTypeNumber}
+              />
+              <FormHelperText sx={styles.inputHelperText}>
+                {formik.errors.price}
+              </FormHelperText>
+            </FormControl>
           </Box>
         </Container>
 
         <Container maxWidth="md">
-          <Box sx={{background: theme.palette.secondary.main, padding: theme.spacing(3), marginBottom: theme.spacing(3)}}>
-          <Typography component="h6" variant="body2" fontWeight="bold">
-              Dados de Contato
-            </Typography>
-
-            <TextField 
-              label="Seu nome"
-              size="small"
-              fullWidth
-              variant="standard"
-            />
-
-            <br /> <br />
-
-            <TextField 
-              label="Seu e-mail"
-              size="small"
-              fullWidth
-              variant="standard"
-            />
+          <Box sx={{background: theme.palette.secondary.main, padding: theme.spacing(3), marginBottom: theme.spacing(3)}}>            
+            <FormControl error={Boolean(formik.errors.name)} fullWidth>
+              <InputLabel sx={styles.inputLabel}>
+                Seu Nome
+              </InputLabel>
+              <Input 
+                name="name"
+                value={formik.values.name}
+                onChange={formik.handleChange}
+              />
+              <FormHelperText sx={styles.inputHelperText}>
+                {formik.errors.name}
+              </FormHelperText>
+            </FormControl>
 
             <br /> <br />
 
-            <TextField 
-              label="Seu telefone"
-              size="small"
-              fullWidth
-              variant="standard"
-            />
+            <FormControl error={Boolean(formik.errors.email)} fullWidth>
+              <InputLabel sx={styles.inputLabel}>
+                Seu E-mail
+              </InputLabel>
+              <Input 
+                name="email"
+                value={formik.values.email}
+                onChange={formik.handleChange}
+              />
+              <FormHelperText sx={styles.inputHelperText}>
+                {formik.errors.email}
+              </FormHelperText>
+            </FormControl>
+
+            <br /> <br />
+
+            <FormControl error={Boolean(formik.errors.phone)} fullWidth>
+              <InputLabel sx={styles.inputLabel}>
+                Seu Telefone
+              </InputLabel>
+              <Input 
+                name="phone"
+                type="number"
+                value={formik.values.phone}
+                onChange={formik.handleChange}
+                sx={styles.inputTypeNumber}
+              />
+              <FormHelperText sx={styles.inputHelperText}>
+                {formik.errors.phone}
+              </FormHelperText>
+            </FormControl>
           </Box>
         </Container>
 
