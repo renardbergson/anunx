@@ -17,12 +17,15 @@ import {
   Button,
   InputAdornment,
   FormControl,
-  FormHelperText
+  InputLabel,
+  Input,
+  FormHelperText,
 } from '@mui/material'
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever'
 
 import TemplateDefault from '../../../templates/Default'
 import PageTitle from '@/app/components/PageTitle'
+import theme from '@/app/theme'
 
 
 const ThumbsWrapper = styled.div`
@@ -77,6 +80,16 @@ const MainImageText = styled.span`
   bottom: 0;
 `
 
+const styles = {
+  inputLabel: {
+    marginLeft: -1.8,
+    color: theme.palette.primary.main,
+  },
+  inputHelperText: {
+    marginLeft: 0
+  }
+}
+
 const Publish = () => {
   const theme = useTheme()
 
@@ -100,6 +113,7 @@ const Publish = () => {
     initialValues: {
       title: '',
       category: '',
+      description: '',
     },
     validationSchema: newProductFormValidation,
     onSubmit: values => {
@@ -122,29 +136,24 @@ const Publish = () => {
       <form onSubmit={formik.handleSubmit}>
         <Container maxWidth="md">
           <Box sx={{background: theme.palette.secondary.main, padding: theme.spacing(3), marginBottom: theme.spacing(3)}}>
-            <Typography component="h6" variant="body2" fontWeight="bold">
-              Título do Anúncio
-            </Typography>
-            
-            <TextField 
-              name="title"
-              label="ex.: playstation 5 - mídia física" 
-              variant="standard" 
-              size="small" 
-              fullWidth
-              onChange={formik.handleChange}
-              value={formik.values.title}
-              error={Boolean(formik.errors.title)}
-              helperText={formik.errors.title}
-            />
+            <FormControl error={Boolean(formik.errors.title)} fullWidth>
+              <InputLabel sx={styles.inputLabel}>
+                Título do Anúncio
+              </InputLabel>
+              <Input 
+                name="title"
+                onChange={formik.handleChange}
+                value={formik.values.title}
+              />
+              <FormHelperText sx={styles.inputHelperText}>
+                {formik.errors.title}
+              </FormHelperText>
+            </FormControl>
 
             <br /> <br /> <br />
 
-            <Typography component="h6" variant="body2" fontWeight="bold">
-              Categoria
-            </Typography>
-
             <FormControl error={Boolean(formik.errors.category)} fullWidth>
+              <InputLabel sx={styles.inputLabel}>Categoria</InputLabel>
               <Select
                 name="category"
                 size="small"
@@ -157,7 +166,9 @@ const Publish = () => {
                 <MenuItem value="Veículos">Veículos</MenuItem>
                 <MenuItem value="Esportes">Esportes</MenuItem>
               </Select>
-              <FormHelperText sx={{marginLeft: 0}}> {formik.errors.category} </FormHelperText>
+              <FormHelperText sx={styles.inputHelperText}> 
+                {formik.errors.category} 
+              </FormHelperText>
             </FormControl>
           </Box>
         </Container>
@@ -206,20 +217,22 @@ const Publish = () => {
         </Container>
 
         <Container maxWidth="md">
-          <Box sx={{background: theme.palette.secondary.main, padding: theme.spacing(3), marginBottom: theme.spacing(3)}}>
-            <Typography component="h6" variant="body2" fontWeight="bold">
-              Descricão
-            </Typography>
-
-            <Typography component="div" variant="body2" fontWeight="light" color='primary'>
-              Escreva os detalhes daquilo que está anunciando
-            </Typography>
-
-            <TextField 
-              multiline
-              rows={4}
-              fullWidth
-            />
+          <Box sx={{background: theme.palette.secondary.main, padding: theme.spacing(3), marginBottom: theme.spacing(3)}}>            
+            <FormControl error={Boolean(formik.errors.description)} fullWidth>
+              <InputLabel sx={styles.inputLabel}>
+                Descreva aquilo que está anunciando
+              </InputLabel>
+              <Input 
+                name="description"
+                multiline
+                rows={4}
+                value={formik.values.description}
+                onChange={formik.handleChange}
+              />
+              <FormHelperText sx={styles.inputHelperText}>
+                {formik.errors.description}
+              </FormHelperText>
+            </FormControl>
           </Box>
         </Container>
 
