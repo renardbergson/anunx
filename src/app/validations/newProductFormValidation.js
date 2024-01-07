@@ -9,6 +9,10 @@ const newProductFormValidation = Yup.object().shape({
   category: Yup
     .string()
     .required('campo obrigatório!'),
+  images: Yup
+    .array()
+    .min(1, 'carregue pelo menos uma imagem!')
+    .required('campo obrigatório!'),
   description: Yup
     .string()
     .required('campo obrigatório!')

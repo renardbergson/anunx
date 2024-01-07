@@ -96,26 +96,11 @@ const styles = {
 const Publish = () => {
   const theme = useTheme()
 
-  const { getRootProps, getInputProps } = useDropzone({
-    accept: 'image/*',
-    onDrop: (selectedFiles) => {
-      const filePackage = selectedFiles.map(file => {
-        return (
-          Object.assign(file, {preview: URL.createObjectURL(file)})
-        )
-      })
-
-      setImages([
-        ...images,
-        ...filePackage,
-      ])
-    }
-  })
-
   const formik = useFormik({
     initialValues: {
       title: '',
       category: '',
+      images: [],
       description: '',
       price: '',
       name: '',
@@ -127,12 +112,26 @@ const Publish = () => {
       console.log(values)
     },
   })
-  
-  const [images, setImages] = useState([])
+
+  const { getRootProps, getInputProps } = useDropzone({
+    accept: 'image/*',
+    onDrop: (selectedFiles) => {
+      const filePackage = selectedFiles.map(file => {
+        return (
+          Object.assign(file, {preview: URL.createObjectURL(file)})
+        )
+      })
+
+      formik.setFieldValue('images', [
+        ...formik.values.images,
+        ...filePackage,
+      ])
+    }
+  })
 
   const handleOnRemoveImage = imageName => {
-    const newImagesState = images.filter(image => image.name != imageName)
-    setImages(newImagesState)
+    const newImagesState = formik.values.images.filter(image => image.name != imageName)
+    formik.setFieldValue('images', newImagesState)
   }
 
   return (
@@ -183,25 +182,51 @@ const Publish = () => {
 
         <Container maxWidth="md">
           <Box sx={{background: theme.palette.secondary.main, padding: theme.spacing(3), marginBottom: theme.spacing(3)}}>
-            <Typography component="h6" variant="body2" fontWeight="bold">
+            <Typography 
+              component="h6" 
+              variant="body2" 
+              fontWeight="bold" 
+              color={formik.touched.images && formik.errors.images ? 'error' : 'textPrimary'}
+            >
               Imagens
             </Typography>
 
-            <Typography component="span" variant="body2" fontWeight="light" color='primary'>
+            <Typography 
+              component="span" 
+              variant="body2" 
+              fontWeight="light" 
+              color={formik.touched.images && formik.errors.images ? 'error' : 'textPrimary'} 
+            >
               A primeira imagem será a foto principal do seu anúncio
             </Typography>
 
             <ThumbsWrapper>
-              <Dropzone {...getRootProps()}>
-                <input {...getInputProps()}/>
+              <Dropzone 
+                {...getRootProps()} 
+                style={formik.touched.images && formik.errors.images ? {border: `2px dashed #d32f2f`} : null}
+                onChange={formik.handleChange}
+              >
+                <FormControl error={Boolean(formik.touched.images && formik.errors.images)}>
+                  <input
+                    {...getInputProps()} 
+                    name="images"
+                    values={formik.values.images}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                  />
+                </FormControl>
 
-                <Typography component="span" variant="body2">
+                <Typography 
+                  component="span" 
+                  variant="body2"
+                  color={formik.touched.images && formik.errors.images ? 'error' : 'textPrimary'} 
+                >
                   Clique para adicionar ou arraste as imagens.
                 </Typography>
               </Dropzone>
 
               {
-                images.map((image, index) => {
+                formik.values.images.map((image, index) => {
                   return (
                     <Thumb key={image.name} style={{backgroundImage: `url(${image.preview})`}}>
                       <Mask className='mask' onClick={() => handleOnRemoveImage(image.name)}>
@@ -221,6 +246,19 @@ const Publish = () => {
                 })
               }
             </ThumbsWrapper>
+
+            {
+              formik.touched.images && formik.errors.images 
+              ? <Typography 
+                  variant="caption" 
+                  color="error" 
+                  component="span"
+                  sx={{display: 'block', marginTop: theme.spacing(0.5)}}
+                >
+                  { formik.errors.images }
+                </Typography>
+              : null
+            }
           </Box>
         </Container>
 

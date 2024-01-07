@@ -15,6 +15,18 @@ chaves repetidas, ele atualizará o alvo com a chave repetida mais próxima dos 
 não houver, todas as chaves serão atribuidos ao objeto alvo. Funciona igual à atualização de
 dados usando o spread operator.
 
+O input inserido dentro da dropzone servirá para manipular os arquivos enviados e para validá-
+los com Formik / Yup, por isso, ele recebe um "name" também. Nós enviamos os valores do nosso
+input para o formik através da propriedade "setFieldValue", porque, neste caso, estamos usando
+uma biblioteca de terceiros para manipular a dropzone. A propriedade recebe dois parâmetros:
+
+ex: formik.setFieldValue('nomeDoInput', valorDoInput)
+
+Se não estivermos utilizando validação, precisamos criar nosso próprio estado para gerenciar
+a inserção de imagens:
+
+ex: const [images, setImages] = useState([])
+
 ============= Comentários referentes ao uso do Formik, para validar formulários ==============
 
 para usarmos a validação nativa do Formik, sem Yup, podemos proceder assim:
