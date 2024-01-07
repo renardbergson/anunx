@@ -33,7 +33,7 @@ export default function ButtonAppBar() {
           </Link>
         </Typography>
 
-        <Link href="/pages/user/publish" style={{color: theme.palette.secondary.main}}>
+        <Link href="/pages/product/publish" style={{color: theme.palette.secondary.main}}>
           <Button color="inherit" variant='outlined' size='small'>
             Anunciar e Vender
           </Button>

@@ -11,7 +11,6 @@ import {
   Container,
   Typography,
   Box,
-  TextField,
   Select,
   MenuItem,
   Button,
@@ -127,7 +126,6 @@ const Publish = () => {
     onSubmit: values => {
       console.log(values)
     },
-    validateOnChange: false
   })
   
   const [images, setImages] = useState([])
@@ -144,23 +142,24 @@ const Publish = () => {
       <form onSubmit={formik.handleSubmit}>
         <Container maxWidth="md">
           <Box sx={{background: theme.palette.secondary.main, padding: theme.spacing(3), marginBottom: theme.spacing(3)}}>
-            <FormControl error={Boolean(formik.errors.title)} fullWidth>
+            <FormControl error={Boolean(formik.touched.title && formik.errors.title)} fullWidth>
               <InputLabel sx={styles.inputLabel}>
                 Título do Anúncio
               </InputLabel>
               <Input 
                 name="title"
                 onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
                 value={formik.values.title}
               />
               <FormHelperText sx={styles.inputHelperText}>
-                {formik.errors.title}
+                {formik.touched.title && formik.errors.title ? formik.errors.title : null}
               </FormHelperText>
             </FormControl>
 
             <br /> <br /> <br />
 
-            <FormControl error={Boolean(formik.errors.category)} fullWidth>
+            <FormControl error={Boolean(formik.touched.category && formik.errors.category)} fullWidth>
               <InputLabel sx={styles.inputLabel}>Categoria</InputLabel>
               <Select
                 name="category"
@@ -168,6 +167,7 @@ const Publish = () => {
                 variant="standard"
                 fullWidth
                 onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
                 value={formik.values.category}
               >
                 <MenuItem value="Games e Consoles">Games e Consoles</MenuItem>
@@ -175,7 +175,7 @@ const Publish = () => {
                 <MenuItem value="Esportes">Esportes</MenuItem>
               </Select>
               <FormHelperText sx={styles.inputHelperText}> 
-                {formik.errors.category} 
+                {formik.touched.category && formik.errors.category ? formik.errors.category : null} 
               </FormHelperText>
             </FormControl>
           </Box>
@@ -226,7 +226,7 @@ const Publish = () => {
 
         <Container maxWidth="md">
           <Box sx={{background: theme.palette.secondary.main, padding: theme.spacing(3), marginBottom: theme.spacing(3)}}>            
-            <FormControl error={Boolean(formik.errors.description)} fullWidth>
+            <FormControl error={Boolean(formik.touched.description && formik.errors.description)} fullWidth>
               <InputLabel sx={styles.inputLabel}>
                 Descreva aquilo que está anunciando
               </InputLabel>
@@ -236,9 +236,10 @@ const Publish = () => {
                 rows={4}
                 value={formik.values.description}
                 onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
               />
               <FormHelperText sx={styles.inputHelperText}>
-                {formik.errors.description}
+                {formik.touched.description && formik.errors.description ? formik.errors.description : null}
               </FormHelperText>
             </FormControl>
           </Box>
@@ -246,18 +247,19 @@ const Publish = () => {
 
         <Container maxWidth="md">
           <Box sx={{background: theme.palette.secondary.main, padding: theme.spacing(3), marginBottom: theme.spacing(3)}}>            
-            <FormControl error={Boolean(formik.errors.price)} fullWidth>
+            <FormControl error={Boolean(formik.touched.price && formik.errors.price)} fullWidth>
               <InputLabel sx={styles.inputLabel}>Preço</InputLabel>
               <Input
                 name="price"
                 type="number"
                 value={formik.values.price}
                 onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
                 startAdornment= {<InputAdornment position="start">R$</InputAdornment>}
                 sx={styles.inputTypeNumber}
               />
               <FormHelperText sx={styles.inputHelperText}>
-                {formik.errors.price}
+                {formik.touched.price && formik.errors.price ? formik.errors.price : null}
               </FormHelperText>
             </FormControl>
           </Box>
@@ -265,7 +267,7 @@ const Publish = () => {
 
         <Container maxWidth="md">
           <Box sx={{background: theme.palette.secondary.main, padding: theme.spacing(3), marginBottom: theme.spacing(3)}}>            
-            <FormControl error={Boolean(formik.errors.name)} fullWidth>
+            <FormControl error={Boolean(formik.touched.name && formik.errors.name)} fullWidth>
               <InputLabel sx={styles.inputLabel}>
                 Seu Nome
               </InputLabel>
@@ -273,15 +275,16 @@ const Publish = () => {
                 name="name"
                 value={formik.values.name}
                 onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
               />
               <FormHelperText sx={styles.inputHelperText}>
-                {formik.errors.name}
+                {formik.touched.name && formik.errors.name ? formik.errors.name : null}
               </FormHelperText>
             </FormControl>
 
             <br /> <br />
 
-            <FormControl error={Boolean(formik.errors.email)} fullWidth>
+            <FormControl error={Boolean(formik.touched.email && formik.errors.email)} fullWidth>
               <InputLabel sx={styles.inputLabel}>
                 Seu E-mail
               </InputLabel>
@@ -289,15 +292,16 @@ const Publish = () => {
                 name="email"
                 value={formik.values.email}
                 onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
               />
               <FormHelperText sx={styles.inputHelperText}>
-                {formik.errors.email}
+                {formik.touched.email && formik.errors.email ? formik.errors.email : null}
               </FormHelperText>
             </FormControl>
 
             <br /> <br />
 
-            <FormControl error={Boolean(formik.errors.phone)} fullWidth>
+            <FormControl error={Boolean(formik.touched.phone && formik.errors.phone)} fullWidth>
               <InputLabel sx={styles.inputLabel}>
                 Seu Telefone
               </InputLabel>
@@ -306,10 +310,11 @@ const Publish = () => {
                 type="number"
                 value={formik.values.phone}
                 onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
                 sx={styles.inputTypeNumber}
               />
               <FormHelperText sx={styles.inputHelperText}>
-                {formik.errors.phone}
+                {formik.touched.phone && formik.errors.phone ? formik.errors.phone : null}
               </FormHelperText>
             </FormControl>
           </Box>
