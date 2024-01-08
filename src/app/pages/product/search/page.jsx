@@ -3,7 +3,7 @@
 import { useTheme, Container, Typography, Grid } from "@mui/material"
 import TemplateDefault from "@/app/templates/Default"
 import SearchBar from "@/app/components/SearchBar"
-import ProductGridContainer from "@/app/components/ProductGridContainer"
+import InternalContainer from "@/app/components/InternalContainer"
 import ProductCard from "@/app/components/ProductCard"
 
 const ProductSearch = () => {
@@ -15,7 +15,7 @@ const ProductSearch = () => {
         <SearchBar />
       </Container>
 
-      <ProductGridContainer 
+      <InternalContainer 
         styles={{
           backgroundColor: theme.palette.secondary.main, 
           padding: '20px',
@@ -51,7 +51,7 @@ const ProductSearch = () => {
             image={'https://source.unsplash.com/random?c'}
           />
         </Grid>
-      </ProductGridContainer>
+      </InternalContainer>
     </TemplateDefault>
   )
 }

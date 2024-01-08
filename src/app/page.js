@@ -6,13 +6,13 @@ import {
   Typography,
   Box
 } from '@mui/material'
+import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
 
 import TemplateDefault from './templates/Default'
 import PageTitle from './components/PageTitle'
 import SearchBar from './components/SearchBar'
-import ProductGridContainer from './components/ProductGridContainer'
+import InternalContainer from './components/InternalContainer'
 import ProductCard from './components/ProductCard'
-import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
 
 const Home = () => {
   const theme = useTheme()
@@ -41,7 +41,7 @@ const Home = () => {
         </Typography>
       </Box>
 
-      <ProductGridContainer>
+      <InternalContainer>
         <Grid container spacing={4}>
           <ProductCard 
             title={'Título do Anúncio'}
@@ -64,7 +64,7 @@ const Home = () => {
             description={'A expressão Lorem ipsum é um texto padrão em latim utilizado na produção gráfica para preencher espaços.'}
           />
         </Grid>
-      </ProductGridContainer>
+      </InternalContainer>
     </TemplateDefault>
   )
 }

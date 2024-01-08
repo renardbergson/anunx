@@ -1,4 +1,5 @@
 'use client'
+import Link from 'next/link'
 
 import { 
   Button, 
@@ -11,9 +12,8 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever'
 
 import TemplateDefault from '../../../templates/Default'
 import PageTitle from '@/app/components/PageTitle'
-import ProductGridContainer from '@/app/components/ProductGridContainer'
+import InternalContainer from '@/app/components/InternalContainer'
 import ProductCard from '@/app/components/ProductCard'
-import Link from 'next/link'
 
 const Dashboard = () => {
   return (
@@ -35,7 +35,7 @@ const Dashboard = () => {
         </Link>
       </PageTitle>
 
-      <ProductGridContainer>
+      <InternalContainer>
         <Grid container spacing={4}>
           <ProductCard 
             title={'Título do Anúncio'}
@@ -91,7 +91,7 @@ const Dashboard = () => {
             }
           />
         </Grid>
-      </ProductGridContainer>
+      </InternalContainer>
     </TemplateDefault>
   )
 }

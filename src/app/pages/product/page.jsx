@@ -1,7 +1,9 @@
 /* eslint-disable react/no-unescaped-entities */
 'use client'
 
-import { useTheme } from "@emotion/react"
+import Carousel from "react-material-ui-carousel"
+import theme from "@/app/theme"
+
 import {
   Avatar,
   Box,
@@ -12,29 +14,15 @@ import {
   Grid,
   Typography
 } from "@mui/material"
-import Carousel from "react-material-ui-carousel"
 
 import TemplateDefault from "@/app/templates/Default"
-import ProductGridContainer from "@/app/components/ProductGridContainer"
+import InternalContainer from "@/app/components/InternalContainer"
+import styles from './styles'
 
 const ProductPage = () => {
-  const theme = useTheme()
-
-  const styles = {
-    box: {
-      backgroundColor: theme.palette.secondary.main,
-      padding: theme.spacing(3),
-      marginBottom: theme.spacing(3),
-      borderRadius: '3px'
-    },
-    productText: {
-      marginBottom: theme.spacing(3),
-    }
-  }
-
   return (
     <TemplateDefault>
-      <ProductGridContainer>
+      <InternalContainer>
         <Grid container spacing={3}> 
           <Grid item xs={12} md={8}>
             <Box sx={styles.box}>
@@ -125,7 +113,7 @@ const ProductPage = () => {
             </Box>
           </Grid>
         </Grid>
-      </ProductGridContainer>
+      </InternalContainer>
     </TemplateDefault>
   )
 }

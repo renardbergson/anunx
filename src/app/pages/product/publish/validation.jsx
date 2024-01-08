@@ -1,6 +1,6 @@
 import * as Yup from 'yup'
 
-const newProductFormValidation = Yup.object().shape({
+const yupValidation = Yup.object().shape({
   title: Yup
     .string()
     .required('campo obrigatório!')
@@ -32,4 +32,21 @@ const newProductFormValidation = Yup.object().shape({
     .required('campo obrigatório!')
 })
 
-export default newProductFormValidation
+const formikConfigs = {
+  initialValues: {
+    title: '',
+    category: '',
+    images: [],
+    description: '',
+    price: '',
+    name: '',
+    email: '',
+    phone: '',
+  },
+  validationSchema: yupValidation,
+  onSubmit: values => {
+    console.log(values)
+  },
+}
+
+export default formikConfigs
