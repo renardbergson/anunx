@@ -16,7 +16,7 @@ import {
 } from "@mui/material"
 
 import TemplateDefault from "@/app/templates/Default"
-import InternalContainer from "@/app/components/InternalContainer"
+import InternalContainer from "@/app/partials/InternalContainer"
 import styles from './styles'
 
 const ProductPage = () => {

@@ -11,7 +11,7 @@ const Default = ({ children }) => {
     <div style={{backgroundColor: theme.palette.background.default}}>
       <Header />
 
-      <Box sx={{padding: `${theme.spacing(7)} 0 ${theme.spacing(10)} 0`}}>
+      <Box sx={{padding: `${theme.spacing(7)} 0`}}>
         {children}
       </Box>
 

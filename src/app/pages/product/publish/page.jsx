@@ -15,9 +15,9 @@ import {
 } from '@mui/material'
 
 import { useFormik } from 'formik'
-
-import InternalContainer from '@/app/components/InternalContainer'
 import formikConfigs from '@/app/pages/product/publish/validation'
+
+import InternalContainer from '@/app/partials/InternalContainer'
 import TemplateDefault from '../../../templates/Default'
 import PageTitle from '@/app/components/PageTitle'
 import FileUpload from '@/app/components/FileUpload'

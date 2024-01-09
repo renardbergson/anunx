@@ -11,7 +11,7 @@ import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
 import TemplateDefault from './templates/Default'
 import PageTitle from './components/PageTitle'
 import SearchBar from './components/SearchBar'
-import InternalContainer from './components/InternalContainer'
+import InternalContainer from './partials/InternalContainer'
 import ProductCard from './components/ProductCard'
 
 const Home = () => {

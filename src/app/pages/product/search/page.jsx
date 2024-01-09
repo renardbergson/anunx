@@ -3,7 +3,7 @@
 import { useTheme, Container, Typography, Grid } from "@mui/material"
 import TemplateDefault from "@/app/templates/Default"
 import SearchBar from "@/app/components/SearchBar"
-import InternalContainer from "@/app/components/InternalContainer"
+import InternalContainer from "@/app/partials/InternalContainer"
 import ProductCard from "@/app/components/ProductCard"
 
 const ProductSearch = () => {

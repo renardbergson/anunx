@@ -12,7 +12,7 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever'
 
 import TemplateDefault from '../../../templates/Default'
 import PageTitle from '@/app/components/PageTitle'
-import InternalContainer from '@/app/components/InternalContainer'
+import InternalContainer from '@/app/partials/InternalContainer'
 import ProductCard from '@/app/components/ProductCard'
 
 const Dashboard = () => {
