@@ -19,17 +19,4 @@ const yupValidation = Yup.object().shape({
     .oneOf([Yup.ref('password'), null], 'As senhas não conferem!'),
 })
 
-const formikConfigs = {
-  initialValues: {
-    name: '',
-    email: '',
-    password: '',
-    passwordConf: '',
-  },
-  validationSchema: yupValidation,
-  onSubmit: values => {
-    console.log(values)
-  },
-}
-
-export default formikConfigs
+export default yupValidation

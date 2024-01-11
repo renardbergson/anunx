@@ -14,6 +14,10 @@ const styles = {
   },
   submitButton: {
     marginTop: theme.spacing(6)
+  },
+  circularProgress: {
+    display: 'block', 
+    margin: `${theme.spacing(6)} auto 0 auto`
   }
 }
 

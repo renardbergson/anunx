@@ -1,14 +1,14 @@
 import dbConnect from "@/app/api/utils/dbConnect"
 import { crypto } from "@/app/api/utils/password"
-import UsersModels from "../models/users"
+import UsersModel from "../models/users"
 import { NextResponse as res } from "next/server"
 
 export async function GET () {
   await dbConnect() 
 
-  return res.json({
-    message: 'lista de usuários!'
-  })
+  const customers = await UsersModel.find()
+
+  return res.json(customers)
 }
 
 export async function POST (req) {
@@ -18,7 +18,7 @@ export async function POST (req) {
 
   const passwordCrypto = await crypto(password)
 
-  const user = new UsersModels({
+  const user = new UsersModel({
     name: name,
     email: email,
     password: passwordCrypto,

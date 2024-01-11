@@ -1,7 +1,10 @@
 'use client'
 
 import { useFormik } from 'formik'
-import formikConfigs from './validation'
+import yupValidation from './validation'
+import axios from 'axios'
+import useToast from '@/app/contexts/Toast'
+import { useRouter } from 'next/navigation'
 
 import theme from '@/app/theme'
 import {
@@ -10,7 +13,8 @@ import {
   FormHelperText,
   Input,
   InputLabel,
-  Button
+  Button,
+  CircularProgress
 } from '@mui/material'
 
 import TemplateDefault from '../../../templates/Default'
@@ -19,6 +23,32 @@ import PageTitle from '@/app/components/PageTitle'
 import styles from './styles'
 
 const SignUp = () => {
+  const { setToast } = useToast()
+  const router = useRouter()
+
+  const formikConfigs = {
+    initialValues: {
+      name: '',
+      email: '',
+      password: '',
+      passwordConf: '',
+    },
+    validationSchema: yupValidation,
+    onSubmit: async values => {
+      const response = await axios.post('/api/users', values)
+      
+      if (response.status === 201) {
+        setToast({
+          open: true,
+          severity: 'success',
+          text: 'usuário cadastrado com sucesso!',
+        })
+
+        // router.push('/') REDIRECT !!!
+      }
+    },
+  }
+
   const formik = useFormik(formikConfigs)
 
   return (
@@ -98,16 +128,24 @@ const SignUp = () => {
             </FormControl>
 
             <Box>
-              <Button 
-                type="submit"
-                variant='contained' 
-                color='primary' 
-                size="small"
-                sx={styles.submitButton}
-                fullWidth
-              >
-                Cadastrar
-              </Button>
+              {
+                formik.isSubmitting 
+                ? (
+                  <CircularProgress sx={styles.circularProgress} size={25} />
+                ) : (
+                  <Button 
+                    type="submit"
+                    variant='contained' 
+                    color='primary' 
+                    size="small"
+                    sx={styles.submitButton}
+                    fullWidth
+                    disabled={formik.isSubmitting}
+                  >
+                    Cadastrar
+                  </Button>
+                )
+              }              
             </Box>
           </Box>
         </InternalContainer>

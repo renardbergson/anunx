@@ -2,6 +2,7 @@ import './globals.css'
 
 import theme from './theme'
 import { ThemeProvider } from '@mui/material'
+import { ToastProvider } from './contexts/Toast'
 
 export const metadata = {
   title: 'Anunx - Negócios Online',
@@ -18,7 +19,9 @@ export default function RootLayout({ children }) {
 
       <body>
         <ThemeProvider theme={theme}>
+          <ToastProvider>
             {children}
+          </ToastProvider>
         </ThemeProvider>
       </body>
     </html>

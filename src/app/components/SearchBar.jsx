@@ -1,7 +1,7 @@
 import { useTheme, Paper, InputBase, IconButton } from "@mui/material"
 import SearchIcon from '@mui/icons-material/Search'
 
-const SearchBar = () => {
+const SearchBar = ({ placeholder }) => {
   const theme = useTheme()
 
   return (
@@ -17,7 +17,7 @@ const SearchBar = () => {
     >
     
     <InputBase 
-      placeholder="Ex.: Iphone 13"
+      placeholder={placeholder}
       fullWidth
       sx={{width: '95%'}}
     />

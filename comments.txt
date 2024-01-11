@@ -42,3 +42,9 @@ const validate = values => {
 }
 
 "validate" seria um campo necessário nas configurações do hook useFormik, substituindo "validationSchema"
+
+========= Comentários referentes ao uso do Componente Toast através de um CONTEXTO ==========
+
+Optamos por consumir o Componente Toast dessa forma, para que TODAS AS PÁGINAS da nossa aplicação 
+tivessem acesso a ele mais facilment, de modo que, as props do Toast estarão disponíveis globalmente, 
+acessíveis em qualquer lugar.

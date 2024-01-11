@@ -20,7 +20,7 @@ const Home = () => {
   return (
     <TemplateDefault>
       <PageTitle title={'Bem-vindo ao Anunx!'} subtitle={'O que está procurando?'}>
-        <SearchBar />
+        <SearchBar placeholder={'Ex.: Iphone 13, 128gb'}/>
       </PageTitle>
 
       <Box textAlign="center">
