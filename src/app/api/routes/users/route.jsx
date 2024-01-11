@@ -1,14 +1,14 @@
+import { NextResponse as res } from "next/server"
 import dbConnect from "@/app/api/utils/dbConnect"
 import { crypto } from "@/app/api/utils/password"
-import UsersModel from "../models/users"
-import { NextResponse as res } from "next/server"
+import UsersModel from "../../models/users"
 
 export async function GET () {
   await dbConnect() 
 
   const customers = await UsersModel.find()
 
-  return res.json(customers)
+  return res.json({ success:true, customers })
 }
 
 export async function POST (req) {

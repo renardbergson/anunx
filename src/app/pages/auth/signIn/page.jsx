@@ -22,55 +22,28 @@ import InternalContainer from '@/app/partials/InternalContainer'
 import PageTitle from '@/app/components/PageTitle'
 import styles from './styles'
 
-const SignUp = () => {
+const SignIn = () => {
   const { setToast } = useToast()
   const router = useRouter()
 
   const formikConfigs = {
     initialValues: {
-      name: '',
       email: '',
       password: '',
-      passwordConf: '',
     },
     validationSchema: yupValidation,
-    onSubmit: async values => {
-      const response = await axios.post('/api/routes/users', values)
-      
-      if (response.status === 201) {
-        setToast({
-          open: true,
-          severity: 'success',
-          text: 'usuário cadastrado com sucesso!',
-        })
-        // router.push('/') REDIRECT !!!
-      }
-    },
+    onSubmit: async values => { /* fazer */}
   }
 
   const formik = useFormik(formikConfigs)
 
   return (
     <TemplateDefault>
-      <PageTitle title={'Crie sua conta'} subtitle={'E anuncie para todo o Brasil'} />
+      <PageTitle title={'Entre na sua conta'} />
       
       <form onSubmit={formik.handleSubmit}>
         <InternalContainer maxWidth={'sm'}>
           <Box sx={{background: theme.palette.secondary.main, padding: theme.spacing(3), marginBottom: theme.spacing(3)}}>
-            <FormControl error={Boolean(formik.touched.name && formik.errors.name)} fullWidth>
-              <InputLabel sx={styles.inputLabel}>
-                Nome
-              </InputLabel>
-              <Input 
-                name="name"
-                value={formik.values.name}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-              />
-              <FormHelperText sx={styles.inputHelperText}>
-                {formik.touched.name && formik.errors.name ? formik.errors.name : null}
-              </FormHelperText>
-            </FormControl>
 
             <br /> <br />
 
@@ -110,22 +83,6 @@ const SignUp = () => {
 
             <br /> <br />
 
-            <FormControl error={Boolean(formik.touched.passwordConf && formik.errors.passwordConf)} fullWidth>
-              <InputLabel sx={styles.inputLabel}>
-                Confirme a Senha
-              </InputLabel>
-              <Input 
-                name="passwordConf"
-                type="password"
-                value={formik.values.passwordConf}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-              />
-              <FormHelperText sx={styles.inputHelperText}>
-                {formik.touched.passwordConf && formik.errors.passwordConf ? formik.errors.passwordConf : null}
-              </FormHelperText>
-            </FormControl>
-
             <Box>
               {
                 formik.isSubmitting 
@@ -141,7 +98,7 @@ const SignUp = () => {
                     fullWidth
                     disabled={formik.isSubmitting}
                   >
-                    Cadastrar
+                    Entrar
                   </Button>
                 )
               }              
@@ -153,4 +110,4 @@ const SignUp = () => {
   )
 }
 
-export default SignUp
+export default SignIn
