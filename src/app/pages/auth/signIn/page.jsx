@@ -13,7 +13,9 @@ import {
   InputLabel,
   Button,
   CircularProgress,
-  Alert
+  Alert,
+  Divider,
+  Typography
 } from '@mui/material'
 
 import TemplateDefault from '../../../templates/Default'
@@ -22,13 +24,12 @@ import PageTitle from '../../../components/PageTitle'
 import styles from './styles'
 
 import { signIn, signOut, useSession } from 'next-auth/react'
+import Image from 'next/image'
 
 const SignIn = () => {
   const router = useRouter()
   const session = useSession()
   const searchParams = useSearchParams()
-
-  console.log(session)
 
   const formikConfigs = {
     initialValues: {
@@ -58,6 +59,10 @@ const SignIn = () => {
   const formik = useFormik(formikConfigs)
   const paramSearch = searchParams.get('invalid')
 
+  const handleGoogleLogin = () => {
+    signIn('google', {callbackUrl: '/pages/user/dashboard'})
+  }
+
   return (
     <TemplateDefault>
       <PageTitle title={'Entre na sua conta'} />
@@ -65,6 +70,30 @@ const SignIn = () => {
       <form onSubmit={formik.handleSubmit}>
         <InternalContainer maxWidth={'sm'}>          
           <Box sx={{background: theme.palette.secondary.main, padding: theme.spacing(3), marginBottom: theme.spacing(3)}}>
+            <Box textAlign="center">
+              <Button 
+                variant='contained'
+                size='small'
+                startIcon={
+                  <Image 
+                    src={'/images/logo-google.svg'} 
+                    alt='logo from google'
+                    width={15}
+                    height={15}
+                  />
+                }
+                onClick={handleGoogleLogin}
+              >
+                Entrar com Google
+              </Button>
+            </Box>
+
+            <Divider sx={{margin: `${theme.spacing(6)} 0 ${theme.spacing(3)} 0`}}> 
+              <Typography>
+                ou 
+              </Typography>
+            </Divider>
+
             {
               paramSearch 
               ? <Alert severity='error' sx={{marginBottom: theme.spacing(3)}}>

@@ -1,7 +1,7 @@
 import nextAuth from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
+import GoogleProvider from "next-auth/providers/google";
 import axios from "axios"
-import GitHubProvider from "next-auth/providers/github"
 
 const NEXTAUTH_URI = process.env.NEXTAUTH_URI
 
@@ -21,9 +21,9 @@ export const authOptions = {
       }
     }),
 
-    GitHubProvider({
-      clientId: process.env.GITHUB_ID,
-      clientSecret: process.env.GITHUB_SECRET
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     })
   ],
 
