@@ -14,13 +14,15 @@ import {
   Divider,
 } from '@mui/material'
 
+import { signIn, signOut, useSession } from 'next-auth/react'
+
 export default function ButtonAppBar() {
   const theme = useTheme()
+  const {data} = useSession()
 
   const [anchorUserMenu, setAnchorUserMenu] = useState(false)
 
   const userMenuIsOpen = Boolean(anchorUserMenu) 
-  // quando o objeto de "e.currentTarget" for recebido, será transformado em um booleano = true
 
   return (
     <AppBar position="static">
@@ -33,19 +35,31 @@ export default function ButtonAppBar() {
           </Link>
         </Typography>
 
-        <Link href="/pages/product/publish" style={{color: theme.palette.secondary.main}}>
+        <Link 
+          href={data ? '/pages/product/publish' : '/pages/auth/signIn'} 
+          style={{color: theme.palette.secondary.main}}
+        >
           <Button color="inherit" variant='outlined' size='small'>
             Anunciar e Vender
           </Button>
         </Link>
 
-        <IconButton sx={{marginLeft: theme.spacing(3)}} onClick={e => setAnchorUserMenu(e.currentTarget)}>
-          <Avatar src=""/>
-
-          <Typography variant="subtitle2" sx={{color: theme.palette.secondary.main, marginLeft: theme.spacing(1)}}>
-            Renard Bergson
-          </Typography>
-        </IconButton>
+        {
+          data
+          ? (
+            <IconButton sx={{marginLeft: theme.spacing(3)}} onClick={e => setAnchorUserMenu(e.currentTarget)}>
+              {
+                data.user.image 
+                ? <Avatar src={data.user.image}/> 
+                : <Avatar src={''}/>
+              }
+    
+              <Typography variant="subtitle2" sx={{color: theme.palette.secondary.main, marginLeft: theme.spacing(1)}}>
+                {data.user.name}
+              </Typography>
+            </IconButton>
+          ) : null
+        }
 
         <Menu 
           open={userMenuIsOpen}
@@ -61,7 +75,7 @@ export default function ButtonAppBar() {
             Sobre nós
           </MenuItem>
           <Divider />
-          <MenuItem>
+          <MenuItem onClick={() => signOut({callbackUrl: '/'})}>
             Sair
           </MenuItem>
         </Menu>

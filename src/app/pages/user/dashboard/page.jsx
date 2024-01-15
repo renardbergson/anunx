@@ -15,13 +15,7 @@ import PageTitle from '../../../components/PageTitle'
 import InternalContainer from '../../../partials/InternalContainer'
 import ProductCard from '../../../components/ProductCard'
 
-import { useSession } from 'next-auth/react'
-
 const Dashboard = () => {
-  const session = useSession()
-
-  console.log(session)
-
   return (
     <TemplateDefault>
       <PageTitle title={'Meus Anúncios'}>
