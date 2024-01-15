@@ -1,4 +1,4 @@
-import theme from '@/app/theme'
+import theme from "../../../theme"
 
 const styles = {
   inputLabel: {
@@ -13,7 +13,7 @@ const styles = {
     {display: "none"}, "& input[type=number]": {MozAppearance: "textfield"}
   },
   submitButton: {
-    marginTop: theme.spacing(5)
+    marginTop: theme.spacing(4)
   },
   circularProgress: {
     display: 'block', 

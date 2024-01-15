@@ -1,5 +1,7 @@
-import './globals.css'
+import { AuthProvider } from './components/SessionProvider'
+import { getServerSession } from 'next-auth' // promise
 
+import './globals.css'
 import theme from './theme'
 import { ThemeProvider } from '@mui/material'
 import { ToastProvider } from './contexts/Toast'
@@ -9,7 +11,9 @@ export const metadata = {
   description: 'A sua plataforma de compra e venda',
 }
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
+  const session = await getServerSession()
+
   return (
     <html lang="pt-br">
       <head>
@@ -18,11 +22,13 @@ export default function RootLayout({ children }) {
       </head>
 
       <body>
-        <ThemeProvider theme={theme}>
-          <ToastProvider>
-            {children}
-          </ToastProvider>
-        </ThemeProvider>
+        <AuthProvider session={session}>
+          <ThemeProvider theme={theme}>
+            <ToastProvider>
+              {children}
+            </ToastProvider>
+          </ThemeProvider>
+        </AuthProvider>
       </body>
     </html>
   )

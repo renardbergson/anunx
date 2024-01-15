@@ -1,4 +1,4 @@
-import theme from '@/app/theme'
+import theme from '../theme'
 import { useDropzone } from 'react-dropzone'
 
 import { Typography } from "@mui/material"

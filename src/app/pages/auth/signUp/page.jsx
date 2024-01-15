@@ -3,10 +3,10 @@
 import { useFormik } from 'formik'
 import yupValidation from './validation'
 import axios from 'axios'
-import useToast from '@/app/contexts/Toast'
+import useToast from '../../../contexts/Toast'
 import { useRouter } from 'next/navigation'
 
-import theme from '@/app/theme'
+import theme from '../../../theme'
 import {
   Box,
   FormControl,
@@ -18,8 +18,8 @@ import {
 } from '@mui/material'
 
 import TemplateDefault from '../../../templates/Default'
-import InternalContainer from '@/app/partials/InternalContainer'
-import PageTitle from '@/app/components/PageTitle'
+import InternalContainer from '../../../partials/InternalContainer'
+import PageTitle from '../../../components/PageTitle'
 import styles from './styles'
 
 const SignUp = () => {
@@ -43,7 +43,7 @@ const SignUp = () => {
           severity: 'success',
           text: 'usuário cadastrado com sucesso!',
         })
-        // router.push('/') REDIRECT !!!
+        router.push('/pages/auth/signIn')
       }
     },
   }

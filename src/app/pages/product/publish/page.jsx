@@ -1,6 +1,6 @@
 'use client'
 
-import theme from '@/app/theme'
+import theme from '../../../theme'
 
 import {
   Box,
@@ -15,12 +15,12 @@ import {
 } from '@mui/material'
 
 import { useFormik } from 'formik'
-import formikConfigs from '@/app/pages/product/publish/validation'
+import formikConfigs from '../publish/validation'
 
-import InternalContainer from '@/app/partials/InternalContainer'
+import InternalContainer from '../../../partials/InternalContainer'
 import TemplateDefault from '../../../templates/Default'
-import PageTitle from '@/app/components/PageTitle'
-import FileUpload from '@/app/components/FileUpload'
+import PageTitle from '../../../components/PageTitle'
+import FileUpload from '../../../components/FileUpload'
 import styles from './styles'
 
 const Publish = () => {

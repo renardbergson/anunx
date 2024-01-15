@@ -5,6 +5,7 @@ const InternalContainer = ({ children, maxWidth, styles }) => {
     <Container 
       maxWidth={maxWidth ? maxWidth : 'lg'} 
       sx={styles ? styles : null}
+      style={{minHeight: '45vh'}}
     >
       {children}
     </Container>

@@ -1,10 +1,10 @@
 'use client'
 
 import { useTheme, Container, Typography, Grid } from "@mui/material"
-import TemplateDefault from "@/app/templates/Default"
-import SearchBar from "@/app/components/SearchBar"
-import InternalContainer from "@/app/partials/InternalContainer"
-import ProductCard from "@/app/components/ProductCard"
+import TemplateDefault from "../../../templates/Default"
+import SearchBar from "../../../components/SearchBar"
+import InternalContainer from "../../../partials/InternalContainer"
+import ProductCard from "../../../components/ProductCard"
 
 const ProductSearch = () => {
   const theme = useTheme()

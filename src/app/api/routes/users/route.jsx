@@ -1,6 +1,6 @@
 import { NextResponse as res } from "next/server"
-import dbConnect from "@/app/api/utils/dbConnect"
-import { crypto } from "@/app/api/utils/password"
+import dbConnect from "../../utils/dbConnect"
+import { crypto } from "../../utils/password"
 import UsersModel from "../../models/users"
 
 export async function GET () {

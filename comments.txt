@@ -45,6 +45,29 @@ const validate = values => {
 
 ========= Comentários referentes ao uso do Componente Toast através de um CONTEXTO ==========
 
-Optamos por consumir o Componente Toast dessa forma, para que TODAS AS PÁGINAS da nossa aplicação 
-tivessem acesso a ele mais facilment, de modo que, as props do Toast estarão disponíveis globalmente, 
-acessíveis em qualquer lugar.
+Optamos por consumir o Componente Toast dessa forma, para que todas as páginas da nossa aplicação 
+tivessem acesso a ele mais facilmente. Isso também permite que, mesmo que estejamos transitando entre 
+uma página e outra, o toast não deixe de ser exibido, limitando-se a respeitar o tempo da função de
+callback "onClose".
+
+======================== Comentários referentes ao sistema de Login e Senha ========================
+1 - Primeiro, importamos o componente "SessionProvider" e o reexportamos como um Componente client-side
+e também com o nome de AuthProvider (sem alterar o nome, o re-export não irá funcionar)
+
+2 - Inserimos o AuthProvider como um contexto que envolverá toda a nossa aplicação, através do arquivo 
+"layout.js". Nosso provider precisa do parâmetro "session" para funcionar, esse parâmetro é fornecido 
+por outro Componente do Next-Auth chamado "getServerSession", o qual deve ser transformado em um método 
+assíncrono, através de uma variável. Ex: const session = await getServerSession()
+
+3 - Dentro da pasta do diretório src/app/api/auth criamos um diretório dinâmico chamado [...nextauth] e
+nele uma rota, essa rota conterá o handler "providers" que se encarregará de fazer o controle de login. 
+
+4 - O Next-Auth também fornece 3 elementos importantes: "signIn", "signOut" e useSession. Os dois
+primeiros são funções que realizam funções óbvias, elas controlam o handler, o terceiro nos dá acesso
+a um objeto, com os dados de login do usuário ou, se não houver alguém logado, ele informará o estado
+de login não realizado. 
+
+5 - Ao chamar e função "signIn", os valores enviados como objeto para ela chegarão até a
+// rota "NextAuth", que acionará o handler, antes deste ponto também é preciso informar qual 
+handler queremos usar, ex: "authorize". O handler precisa fazer uma request para algum endpoint,
+repassando para ele os valores de login que recebeu como objeto.

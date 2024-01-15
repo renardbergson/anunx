@@ -11,11 +11,17 @@ import EditIcon from '@mui/icons-material/Edit'
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever'
 
 import TemplateDefault from '../../../templates/Default'
-import PageTitle from '@/app/components/PageTitle'
-import InternalContainer from '@/app/partials/InternalContainer'
-import ProductCard from '@/app/components/ProductCard'
+import PageTitle from '../../../components/PageTitle'
+import InternalContainer from '../../../partials/InternalContainer'
+import ProductCard from '../../../components/ProductCard'
+
+import { useSession } from 'next-auth/react'
 
 const Dashboard = () => {
+  const session = useSession()
+
+  console.log(session)
+
   return (
     <TemplateDefault>
       <PageTitle title={'Meus Anúncios'}>

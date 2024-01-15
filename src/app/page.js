@@ -14,8 +14,20 @@ import SearchBar from './components/SearchBar'
 import InternalContainer from './partials/InternalContainer'
 import ProductCard from './components/ProductCard'
 
+import { signIn, signOut, useSession } from 'next-auth/react'
+
 const Home = () => {
   const theme = useTheme()
+  const { data } = useSession()
+
+  if (data) {
+    return (
+      <>
+        Tem alguém, logado
+        <button onClick={() => signOut()}>Deslogar</button>
+      </>
+    )
+  }
 
   return (
     <TemplateDefault>

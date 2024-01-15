@@ -2,21 +2,21 @@ import { useTheme } from '@emotion/react'
 
 import Header from '../partials/Header'
 import Footer from '../partials/Footer'
-import { Box } from '@mui/material'
+import { Box, Container } from '@mui/material'
 
 const Default = ({ children }) => {
   const theme = useTheme()
 
   return (
-    <div style={{backgroundColor: theme.palette.background.default}}>
+    <Box style={{backgroundColor: theme.palette.background.default}}>
       <Header />
 
-      <Box sx={{padding: `${theme.spacing(7)} 0`}}>
+      <Container sx={{padding: `${theme.spacing(7)} 0`}}>
         {children}
-      </Box>
+      </Container>
 
       <Footer />
-    </div>
+    </Box>
   )
 }
 

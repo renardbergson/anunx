@@ -2,7 +2,7 @@
 'use client'
 
 import Carousel from "react-material-ui-carousel"
-import theme from "@/app/theme"
+import theme from "../../theme"
 
 import {
   Avatar,
@@ -15,8 +15,8 @@ import {
   Typography
 } from "@mui/material"
 
-import TemplateDefault from "@/app/templates/Default"
-import InternalContainer from "@/app/partials/InternalContainer"
+import TemplateDefault from "../../templates/Default"
+import InternalContainer from "../../partials/InternalContainer"
 import styles from './styles'
 
 const ProductPage = () => {
