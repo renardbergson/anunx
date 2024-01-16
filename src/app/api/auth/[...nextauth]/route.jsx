@@ -3,15 +3,12 @@ import CredentialsProvider from "next-auth/providers/credentials"
 import GoogleProvider from "next-auth/providers/google";
 import axios from "axios"
 
-const NEXTAUTH_URI = process.env.NEXTAUTH_URI
-
 export const authOptions = {
-
   providers: [
     CredentialsProvider({
       name: 'credentials',
       async authorize(credentials) {
-        const res = await axios.post(`${NEXTAUTH_URI}/api/routes/signIn`, credentials)
+        const res = await axios.post(`${process.env.APP_URI}/api/routes/signIn`, credentials)
 
         const user = await res.data
 
