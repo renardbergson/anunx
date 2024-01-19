@@ -32,21 +32,4 @@ const yupValidation = Yup.object().shape({
     .required('campo obrigatório!')
 })
 
-const formikConfigs = {
-  initialValues: {
-    title: '',
-    category: '',
-    images: [],
-    description: '',
-    price: '',
-    name: '',
-    email: '',
-    phone: '',
-  },
-  validationSchema: yupValidation,
-  onSubmit: values => {
-    console.log(values)
-  },
-}
-
-export default formikConfigs
+export default yupValidation

@@ -15,16 +15,82 @@ import {
 } from '@mui/material'
 
 import { useFormik } from 'formik'
-import formikConfigs from '../publish/validation'
+import yupValidation from '../publish/validation'
 
 import InternalContainer from '../../../partials/InternalContainer'
 import TemplateDefault from '../../../templates/Default'
 import PageTitle from '../../../components/PageTitle'
 import FileUpload from '../../../components/FileUpload'
 import styles from './styles'
+import axios from 'axios'
+import useToast from '../../../contexts/Toast'
+//import { useRouter } from 'next/navigation'
 
 const Publish = () => {
+  const formikConfigs = {
+    initialValues: {
+      title: '',
+      category: '',
+      images: [],
+      description: '',
+      price: '',
+      name: '',
+      email: '',
+      phone: '',
+    },
+    validationSchema: yupValidation,
+    onSubmit: handleSubmit,
+  }
+
   const formik = useFormik(formikConfigs)
+  const { setToast } = useToast()
+  //const router = useRouter()
+
+  function handleSubmit (values) {
+    const formData = new FormData()
+
+    // original values
+    console.log(values)
+
+    // constructor loop
+    for (const field in values) {
+      if (field === 'images') {
+        values.images.forEach(image => {
+          formData.append('images', image)
+        })
+      } else {
+        formData.append(field, values[field])
+      }
+    }
+
+    // console from formData
+    for (const entry of formData.entries()) {
+			console.log(entry)
+		}
+
+    // request
+    axios.post('/api/routes/products', formData, {headers: {'Content-Type': 'multipart/form-data'}})
+    .then(handleSuccess)
+    .catch(handleError)
+  }
+
+  function handleSuccess () {
+    setToast({
+      open: true,
+      severity: 'success',
+      text: 'Produto cadastrado com sucesso!',
+    })
+
+    //router.push('/pages/user/dashboard')
+  }
+
+  function handleError () {
+    setToast({
+      open: true,
+      severity: 'error',
+      text: 'Ops, ocorreu um erro. Tente novamente!',
+    })
+  }
 
   return (
     <TemplateDefault>
