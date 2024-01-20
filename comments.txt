@@ -1,3 +1,8 @@
+===================== Comentários referentes às variáveis de ambiente =====================
+Componentes client site não têm acesso às variáveis de ambiente comuns, para tornar uma variável
+desse tipo acessível de ambos os lados, acrescentamos "NEXT_PUBLIC_" antes do nome que vamos dar
+para ela.
+
 ============ Comentários referentes ao React Dropzone, presente na page "publish" ============
 
 react dropzone retorna duas funções
@@ -11,7 +16,7 @@ com map, estamos retornando para o novo array "filePackage" um objeto
  
 o método Object.assign recebe pelo menos duas propriedades, o primeiro será o objeto ALVO,
 o segundo ou os demais serão os objetos atribuidos/atualizados no alvo. Se houver objetos com 
-chaves repetidas, ele atualizará o alvo com a chave repetida mais próxima dos parênteses, se 
+chaves repetidas, ele atualizará o alvo com a chave repetida mais próxima do parêntese final, se 
 não houver, todas as chaves serão atribuidos ao objeto alvo. Funciona igual à atualização de
 dados usando o spread operator.
 
@@ -51,6 +56,7 @@ uma página e outra, o toast não deixe de ser exibido, limitando-se a respeitar
 callback "onClose".
 
 ======================== Comentários referentes ao sistema de Login e Senha ========================
+
 1 - Primeiro, importamos o componente "SessionProvider" e o reexportamos como um Componente client-side
 e também com o nome de AuthProvider (sem alterar o nome, o re-export não irá funcionar)
 
@@ -62,12 +68,15 @@ assíncrono, através de uma variável. Ex: const session = await getServerSessi
 3 - Dentro da pasta do diretório src/app/api/auth criamos um diretório dinâmico chamado [...nextauth] e
 nele uma rota, essa rota conterá o handler "providers" que se encarregará de fazer o controle de login. 
 
-4 - O Next-Auth também fornece 3 elementos importantes: "signIn", "signOut" e useSession. Os dois
+4 - Para gerar uma chave segredo/token para o handler, digita-se no terminal: openssl rand -base64 X. 
+Substituimos X pela quantidade de caracteres desejados para chave segredo.
+
+5 - O Next-Auth também fornece 3 elementos importantes: "signIn", "signOut" e useSession. Os dois
 primeiros são funções que realizam funções óbvias, elas controlam o handler, o terceiro nos dá acesso
 a um objeto, com os dados de login do usuário ou, se não houver alguém logado, ele informará o estado
 de login não realizado. 
 
-5 - Ao chamar e função "signIn", os valores enviados como objeto para ela chegarão até a
+6 - Ao chamar e função "signIn", os valores enviados como objeto para ela chegarão até a
 // rota "NextAuth", que acionará o handler, antes deste ponto também é preciso informar qual 
 handler queremos usar, ex: "authorize". O handler precisa fazer uma request para algum endpoint,
 repassando para ele os valores de login que recebeu como objeto.

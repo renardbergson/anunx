@@ -12,6 +12,7 @@ import {
   InputLabel,
   Input,
   FormHelperText,
+  CircularProgress,
 } from '@mui/material'
 
 import { useFormik } from 'formik'
@@ -24,9 +25,14 @@ import FileUpload from '../../../components/FileUpload'
 import styles from './styles'
 import axios from 'axios'
 import useToast from '../../../contexts/Toast'
-//import { useRouter } from 'next/navigation'
+import { useSession } from 'next-auth/react'
+import { useRouter } from 'next/navigation'
 
 const Publish = () => {
+  const { data } = useSession()
+  const { setToast } = useToast()
+  const router = useRouter()
+
   const formikConfigs = {
     initialValues: {
       title: '',
@@ -43,14 +49,12 @@ const Publish = () => {
   }
 
   const formik = useFormik(formikConfigs)
-  const { setToast } = useToast()
-  //const router = useRouter()
 
   function handleSubmit (values) {
     const formData = new FormData()
 
     // original values
-    console.log(values)
+    // console.log(values)
 
     // constructor loop
     for (const field in values) {
@@ -59,17 +63,17 @@ const Publish = () => {
           formData.append('images', image)
         })
       } else {
+        formData.append('id', data.user._id)
+        formData.append('image', data.user.image)
         formData.append(field, values[field])
       }
     }
 
     // console from formData
-    for (const entry of formData.entries()) {
-			console.log(entry)
-		}
+    // console.log(...formData)
 
-    // request
-    axios.post('/api/routes/products', formData, {headers: {'Content-Type': 'multipart/form-data'}})
+    //request
+    axios.post(`${process.env.NEXT_PUBLIC_BACK_END}/products/new`, formData)
     .then(handleSuccess)
     .catch(handleError)
   }
@@ -81,7 +85,7 @@ const Publish = () => {
       text: 'Produto cadastrado com sucesso!',
     })
 
-    //router.push('/pages/user/dashboard')
+    setTimeout(() => router.push('/pages/user/dashboard'), 2000)
   }
 
   function handleError () {
@@ -242,15 +246,22 @@ const Publish = () => {
 
         <InternalContainer maxWidth={'md'}>
           <Box textAlign="right">
-            <Button 
+          {
+            formik.isSubmitting
+            ? (
+              <CircularProgress size={30}/>
+            ) : (
+              <Button 
               type="submit"
               variant='contained' 
               color='primary' 
               size="small"
               sx={{marginBottom: theme.spacing(3)}}
-            >
-              Publicar anúncio
-            </Button>
+              >
+                Publicar anúncio
+              </Button>
+            )
+          }
           </Box>
         </InternalContainer>
       </form>

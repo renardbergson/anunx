@@ -19,7 +19,7 @@ const Dashboard = () => {
   return (
     <TemplateDefault>
       <PageTitle title={'Meus Anúncios'}>
-        <Link href="/pages/user/publish" 
+        <Link href="/pages/product/publish" 
           style={{
             textDecoration: 'none',
             display: 'block',

@@ -26,7 +26,7 @@ import styles from './styles'
 import { signIn, signOut, useSession } from 'next-auth/react'
 import Image from 'next/image'
 
-const SignIn = () => {
+const SignInPage = () => {
   const router = useRouter()
   const session = useSession()
   const searchParams = useSearchParams()
@@ -165,4 +165,4 @@ const SignIn = () => {
   )
 }
 
-export default SignIn
+export default SignInPage

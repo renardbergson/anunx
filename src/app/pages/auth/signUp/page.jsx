@@ -35,7 +35,7 @@ const SignUp = () => {
     },
     validationSchema: yupValidation,
     onSubmit: async values => {
-      const response = await axios.post('/api/routes/users', values)
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_BACK_END}/users/new`, values)
       
       if (response.status === 201) {
         setToast({
