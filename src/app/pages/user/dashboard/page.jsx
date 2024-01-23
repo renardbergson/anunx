@@ -1,5 +1,9 @@
 'use client'
+
+import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
+import axios from 'axios'
+import { getSession } from 'next-auth/react'
 
 import { 
   Button, 
@@ -14,86 +18,73 @@ import TemplateDefault from '../../../templates/Default'
 import PageTitle from '../../../components/PageTitle'
 import InternalContainer from '../../../partials/InternalContainer'
 import ProductCard from '../../../components/ProductCard'
+import { currencyFormat } from '../../../utils/currency'
 
-const Dashboard = () => {
-  return (
-    <TemplateDefault>
-      <PageTitle title={'Meus Anúncios'}>
-        <Link href="/pages/product/publish" 
-          style={{
-            textDecoration: 'none',
-            display: 'block',
-            width: 'fit-content',
-            margin: '0 auto'
-          }}>
-          <Button 
-            variant='contained' 
-            color='primary' 
-            sx={{display: 'block', margin: '20px auto'}}>
-              Publicar novo anúncio
-          </Button>
-        </Link>
-      </PageTitle>
+const Dashboard = () => {  
+  const [userAds, setUserAds] = useState()
 
-      <InternalContainer>
-        <Grid container spacing={4}>
-          <ProductCard 
-            title={'Título do Anúncio'}
-            subtitle={'R$ 60,00'}
-            image={'https://source.unsplash.com/random?a'}
-            description={'A expressão Lorem ipsum é um texto padrão em latim utilizado na produção gráfica para preencher espaços.'}
-            actions={
-              <>
-                <IconButton color='primary'>
-                  <EditIcon sx={{fontSize: '20px'}}/>
-                </IconButton>
+  useEffect(() => {
+    async function getUser () {
+      const { user } = await getSession()
 
-                <IconButton size='small' color='primary'>
-                  <DeleteForeverIcon sx={{fontSize: '20px'}}/>
-                </IconButton>
-              </>
-            }
-          />
+      const response = await axios.get(`http://localhost:8080/products/getAds/${user._id}`)
 
-          <ProductCard 
-            title={'Título do Anúncio'}
-            subtitle={'R$ 60,00'}
-            image={'https://source.unsplash.com/random?b'}
-            description={'A expressão Lorem ipsum é um texto padrão em latim utilizado na produção gráfica para preencher espaços.'}
-            actions={
-              <>
-                <IconButton color='primary'>
-                  <EditIcon sx={{fontSize: '20px'}}/>
-                </IconButton>
+      setUserAds(response.data)
+    }
 
-                <IconButton size='small' color='primary'>
-                  <DeleteForeverIcon sx={{fontSize: '20px'}}/>
-                </IconButton>
-              </>
-            }
-          />
+    getUser()
+  }, [])
 
-          <ProductCard 
-            title={'Título do Anúncio'}
-            subtitle={'R$ 60,00'}
-            image={'https://source.unsplash.com/random?c'}
-            description={'A expressão Lorem ipsum é um texto padrão em latim utilizado na produção gráfica para preencher espaços.'}
-            actions={
-              <>
-                <IconButton color='primary'>
-                  <EditIcon sx={{fontSize: '20px'}}/>
-                </IconButton>
-
-                <IconButton size='small' color='primary'>
-                  <DeleteForeverIcon sx={{fontSize: '20px'}}/>
-                </IconButton>
-              </>
-            }
-          />
-        </Grid>
-      </InternalContainer>
-    </TemplateDefault>
-  )
+  if ( userAds != null ) {
+    return (  
+      <TemplateDefault>
+        <PageTitle title={'Meus Anúncios'}>
+          <Link href="/pages/product/publish" 
+            style={{
+              textDecoration: 'none',
+              display: 'block',
+              width: 'fit-content',
+              margin: '0 auto'
+            }}>
+            <Button 
+              variant='contained' 
+              color='primary' 
+              sx={{display: 'block', margin: '20px auto'}}>
+                Publicar novo anúncio
+            </Button>
+          </Link>
+        </PageTitle>
+  
+        <InternalContainer>
+          <Grid container spacing={4}>
+            {userAds.map((ad) => {
+              return (
+                <React.Fragment key={ad._id}>
+                  <ProductCard
+                    title={ad.title}
+                    subtitle={currencyFormat(ad.price)}
+                    image={`${process.env.NEXT_PUBLIC_BACK_END}/images/${ad.images[0].name}`}
+                    description={ad.description}
+                    actions={
+                      <>
+                        <IconButton color='primary'>
+                          <EditIcon sx={{fontSize: '20px'}}/>
+                        </IconButton>
+        
+                        <IconButton size='small' color='primary'>
+                          <DeleteForeverIcon sx={{fontSize: '20px'}}/>
+                        </IconButton>
+                      </>
+                    }
+                  />
+                </React.Fragment>
+              )
+            })}
+          </Grid>
+        </InternalContainer>
+      </TemplateDefault>
+    )
+  }
 }
 
 export default Dashboard

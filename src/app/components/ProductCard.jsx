@@ -16,7 +16,7 @@ const ProductCard = ({ title, subtitle, image, description, actions }) => {
     <Grid item xs={12} sm={6} md={4}>
       <Card sx={{borderRadius: '5px'}}>
         <CardMedia
-          sx={{ paddingTop: '60%' }}
+          sx={{ height: "230px", width: "100%" }}
           image={image}
         />
 
