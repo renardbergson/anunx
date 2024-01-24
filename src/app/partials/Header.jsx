@@ -67,14 +67,19 @@ export default function ButtonAppBar() {
           onClose={() => setAnchorUserMenu(null)}
         >
           <MenuItem>
+            <Link href='/' style={{textDecoration: 'none', color: theme.palette.primary.main}}>
+              Página Inicial  
+            </Link>
+          </MenuItem>
+
+          <MenuItem>
             <Link href='/pages/user/dashboard' style={{textDecoration: 'none', color: theme.palette.primary.main}}>
               Meus anúncios  
             </Link>
           </MenuItem>
-          <MenuItem>
-            Sobre nós
-          </MenuItem>
+
           <Divider />
+
           <MenuItem onClick={() => signOut({callbackUrl: '/'})}>
             Sair
           </MenuItem>

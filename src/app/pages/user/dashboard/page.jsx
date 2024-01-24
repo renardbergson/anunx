@@ -7,20 +7,20 @@ import { getSession } from 'next-auth/react'
 
 import { 
   Button, 
-  Grid, 
-  IconButton 
+  Grid,
+  CardActions,
 } from '@mui/material'
-
-import EditIcon from '@mui/icons-material/Edit'
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever'
 
 import TemplateDefault from '../../../templates/Default'
 import PageTitle from '../../../components/PageTitle'
 import InternalContainer from '../../../partials/InternalContainer'
 import ProductCard from '../../../components/ProductCard'
+import Dialog from '../../../components/Dialog'
+import useToast from '../../../contexts/Toast'
 import { currencyFormat } from '../../../utils/currency'
 
 const Dashboard = () => {  
+  const { setToast } = useToast()
   const [userAds, setUserAds] = useState()
 
   useEffect(() => {
@@ -34,6 +34,47 @@ const Dashboard = () => {
 
     getUser()
   }, [])
+
+  const [removedProducts, setRemovedProducts] = useState([])
+
+  const [productID, setProductID] = useState()
+
+  const [dialogIsOpen, setDialogIsOpen] = useState(false)
+
+  const handleClickRemove = productID => {
+    setDialogIsOpen(true)
+    setProductID(productID)
+  }
+
+  const handleConfirmRemove = () => {
+    setDialogIsOpen(false)
+    axios.delete(`${process.env.NEXT_PUBLIC_BACK_END}/products/remove`, 
+    {
+      data: {
+        productID
+      }
+    })
+    .then(handleSuccess)
+    .catch(handleError)
+  }
+
+  const handleSuccess = () => {
+    setRemovedProducts([...removedProducts, productID])
+
+    setToast({
+      open: true,
+      severity: 'success',
+      text: 'Anúncio removido com sucesso!'
+    })
+  }
+
+  const handleError = () => {
+    setToast({
+      open: true,
+      severity: 'error',
+      text: 'Ops, ocorreu um erro! Tente novamente depois.'
+    })
+  }
 
   if ( userAds != null ) {
     return (  
@@ -58,6 +99,8 @@ const Dashboard = () => {
         <InternalContainer>
           <Grid container spacing={4}>
             {userAds.map((ad) => {
+              if (removedProducts.includes(ad._id)) return null
+
               return (
                 <React.Fragment key={ad._id}>
                   <ProductCard
@@ -67,13 +110,19 @@ const Dashboard = () => {
                     description={ad.description}
                     actions={
                       <>
-                        <IconButton color='primary'>
-                          <EditIcon sx={{fontSize: '20px'}}/>
-                        </IconButton>
-        
-                        <IconButton size='small' color='primary'>
-                          <DeleteForeverIcon sx={{fontSize: '20px'}}/>
-                        </IconButton>
+                        <CardActions disableSpacing>
+                          <Button size="small" sx={{fontSize: '0.8em'}}>
+                            Editar
+                          </Button>
+
+                          <Button 
+                            size="small" 
+                            sx={{fontSize: '0.8em'}}
+                            onClick={() => handleClickRemove(ad._id)}
+                          >
+                            Excluir
+                          </Button>
+                        </CardActions>
                       </>
                     }
                   />
@@ -81,6 +130,12 @@ const Dashboard = () => {
               )
             })}
           </Grid>
+        
+        <Dialog 
+          isOpen={dialogIsOpen}
+          onClose={() => setDialogIsOpen(false)}
+          onConfirm={handleConfirmRemove}
+        />
         </InternalContainer>
       </TemplateDefault>
     )
