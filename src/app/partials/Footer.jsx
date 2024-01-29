@@ -1,5 +1,6 @@
-import { Container, Divider, Grid, Typography, useTheme } from "@mui/material"
-import Link from "next/link"
+'use client'
+
+import { Container, Divider, Grid, useTheme } from "@mui/material"
 
 import FooterLink from "../components/FooterLink"
 

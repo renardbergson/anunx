@@ -1,5 +1,8 @@
+'use client'
+
 import React, {useState} from 'react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 
 import {
   useTheme,
@@ -14,11 +17,11 @@ import {
   Divider,
 } from '@mui/material'
 
-import { signIn, signOut, useSession } from 'next-auth/react'
+import { signOut } from 'next-auth/react'
 
-export default function ButtonAppBar() {
+const Header = ({ user }) => {
   const theme = useTheme()
-  const {data} = useSession()
+  const router = useRouter()
 
   const [anchorUserMenu, setAnchorUserMenu] = useState(false)
 
@@ -28,34 +31,37 @@ export default function ButtonAppBar() {
     <AppBar position="static">
       <Toolbar>
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          <Link href="/" style={{color: theme.palette.secondary.main, textDecoration: 'none'}}>
-            <Button color='secondary' size='large' sx={{letterSpacing: '2px', fontSize: '1em'}}>
-              Anunx
-            </Button>
-          </Link>
+          <Button
+            color='secondary'
+            size='large'
+            sx={{letterSpacing: '2px', fontSize: '1em'}}
+            onClick={() => router.push('/')}
+          >
+            Anunx
+          </Button>
         </Typography>
 
-        <Link 
-          href={data ? '/pages/product/publish' : '/pages/auth/signIn'} 
-          style={{color: theme.palette.secondary.main}}
+        <Button 
+          color="inherit"
+          variant='outlined' 
+          size='small'
+          onClick={() => router.push('/pages/product/publish')}
         >
-          <Button color="inherit" variant='outlined' size='small'>
-            Anunciar e Vender
-          </Button>
-        </Link>
+          Anunciar e Vender
+        </Button>
 
         {
-          data
+          user
           ? (
             <IconButton sx={{marginLeft: theme.spacing(3)}} onClick={e => setAnchorUserMenu(e.currentTarget)}>
               {
-                data.user.image 
-                ? <Avatar src={data.user.image}/> 
-                : <Avatar src={''}/>
+                user.image 
+                ? <Avatar src={user.image}/> 
+                : <Avatar> {user.name[0]} </Avatar>
               }
     
               <Typography variant="subtitle2" sx={{color: theme.palette.secondary.main, marginLeft: theme.spacing(1)}}>
-                {data.user.name}
+                {user.name}
               </Typography>
             </IconButton>
           ) : null
@@ -66,16 +72,12 @@ export default function ButtonAppBar() {
           anchorEl={anchorUserMenu}
           onClose={() => setAnchorUserMenu(null)}
         >
-          <MenuItem>
-            <Link href='/' style={{textDecoration: 'none', color: theme.palette.primary.main}}>
-              Página Inicial  
-            </Link>
+          <MenuItem onClick={() => router.push('/')}>
+            Página Inicial  
           </MenuItem>
 
-          <MenuItem>
-            <Link href='/pages/user/dashboard' style={{textDecoration: 'none', color: theme.palette.primary.main}}>
-              Meus anúncios  
-            </Link>
+          <MenuItem onClick={() => router.push('/pages/user/dashboard')}>
+            Meus anúncios  
           </MenuItem>
 
           <Divider />
@@ -88,3 +90,5 @@ export default function ButtonAppBar() {
     </AppBar>
   )
 }
+
+export default Header

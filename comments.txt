@@ -1,3 +1,6 @@
+============== Comentários referentes à URL para obtenção de imagens randômicas  ==============
+"https://source.unsplash.com/random?a"
+
 ===================== Comentários referentes às variáveis de ambiente =====================
 Componentes client site não têm acesso às variáveis de ambiente comuns, para tornar uma variável
 desse tipo acessível de ambos os lados, acrescentamos "NEXT_PUBLIC_" antes do nome que vamos dar
@@ -81,9 +84,14 @@ de login não realizado.
 handler queremos usar, ex: "authorize". O handler precisa fazer uma request para algum endpoint,
 repassando para ele os valores de login que recebeu como objeto.
 
-================= Comentários referentes à obtenção de usuários logados =================
-Dadas as mudanças do next 13 em diante, criamos uma função assíncrona que, neste caso, é usada para 
-obter o usuário, utilizando o método "getSession", que também é um método assíncrono, diferente de
-"useSession", que às vezes não retornava o ID do usuário. Isso garante que, ao chamar a nossa função
-assíncrona dentro do componente Dashboard, fazemos a verificação se os dados já estão disponíveis,
-então, renderizamos o componente da página.
+================== Comentários referentes à fetchData e componentes Páginas ===================
+O "ideal" é que as páginas permaneçam sendo server-side components, assim, podemos ter páginas 
+assíncronas e fazer fetch's assíncronos com segurança, a fim de repassar os dados obtidos para 
+os componentes filhos, mesmo que estes sejam componentes client-side. É perfeitamente possível
+importar componentes client-side dentro um componente server-side. Essa abordagem substituiu o 
+antigos "getServerSideProps".
+
+============= Comentários referentes à Inserção e Exclusão de items da base de dados ===========
+Usamos a funcão revalidatePath(), ao adicionar e ao remover itens da base da dados, para atualizar o 
+cache do next. Caso contrário, podemos ter problemas de items inseridos ou excluídos aparecendo apenas 
+em rotas específicas.

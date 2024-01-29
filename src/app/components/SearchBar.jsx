@@ -1,8 +1,12 @@
+'use client'
+
 import { useTheme, Paper, InputBase, IconButton } from "@mui/material"
 import SearchIcon from '@mui/icons-material/Search'
+import { useRouter } from "next/navigation"
 
 const SearchBar = ({ placeholder }) => {
   const theme = useTheme()
+  const router = useRouter()
 
   return (
     <Paper 
@@ -15,16 +19,15 @@ const SearchBar = ({ placeholder }) => {
         margin: '20px 0'
       }}
     >
-    
-    <InputBase 
-      placeholder={placeholder}
-      fullWidth
-      sx={{width: '95%'}}
-    />
+      <InputBase 
+        placeholder={placeholder}
+        fullWidth
+        sx={{width: '95%'}}
+      />
 
-    <IconButton>
-      <SearchIcon />
-    </IconButton>
+      <IconButton onClick={() => router.push('/pages/product/search')}>
+        <SearchIcon />
+      </IconButton>
     </Paper>
   )
 }

@@ -1,154 +1,32 @@
-'use client'
-
-import { useFormik } from 'formik'
-import yupValidation from './validation'
-import axios from 'axios'
-import useToast from '../../../contexts/Toast'
-import { useRouter } from 'next/navigation'
-
-import theme from '../../../theme'
-import {
-  Box,
-  FormControl,
-  FormHelperText,
-  Input,
-  InputLabel,
-  Button,
-  CircularProgress
-} from '@mui/material'
-
 import TemplateDefault from '../../../templates/Default'
-import InternalContainer from '../../../partials/InternalContainer'
 import PageTitle from '../../../components/PageTitle'
-import styles from './styles'
+import InternalContainer from '../../../partials/InternalContainer'
+import WhiteBox from '../../../components/WhiteBox'
+import FormContent from './formContent'
 
-const SignUp = () => {
-  const { setToast } = useToast()
-  const router = useRouter()
+import axios from 'axios'
 
-  const formikConfigs = {
-    initialValues: {
-      name: '',
-      email: '',
-      password: '',
-      passwordConf: '',
-    },
-    validationSchema: yupValidation,
-    onSubmit: async values => {
-      const response = await axios.post(`${process.env.NEXT_PUBLIC_BACK_END}/users/new`, values)
-      
-      if (response.status === 201) {
-        setToast({
-          open: true,
-          severity: 'success',
-          text: 'usuário cadastrado com sucesso!',
-        })
-        router.push('/pages/auth/signIn')
-      }
-    },
+const SignUp = async () => {
+  const handleSaveUser = async (values) => {
+    'use server'
+
+    const response = await axios.post(`${process.env.NEXT_PUBLIC_BACK_END}/users/new`, values)
+
+    return response.status
   }
-
-  const formik = useFormik(formikConfigs)
 
   return (
     <TemplateDefault>
-      <PageTitle title={'Crie sua conta'} subtitle={'E anuncie para todo o Brasil'} />
-      
-      <form onSubmit={formik.handleSubmit}>
-        <InternalContainer maxWidth={'sm'}>
-          <Box sx={{background: theme.palette.secondary.main, padding: theme.spacing(3), marginBottom: theme.spacing(3)}}>
-            <FormControl error={Boolean(formik.touched.name && formik.errors.name)} fullWidth>
-              <InputLabel sx={styles.inputLabel}>
-                Nome
-              </InputLabel>
-              <Input 
-                name="name"
-                value={formik.values.name}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-              />
-              <FormHelperText sx={styles.inputHelperText}>
-                {formik.touched.name && formik.errors.name ? formik.errors.name : null}
-              </FormHelperText>
-            </FormControl>
+      <PageTitle 
+        title={'Crie sua conta'} 
+        subtitle={'E anuncie para todo o Brasil'}
+      />
 
-            <br /> <br />
-
-            <FormControl error={Boolean(formik.touched.email && formik.errors.email)} fullWidth>
-              <InputLabel sx={styles.inputLabel}>
-                E-mail
-              </InputLabel>
-              <Input 
-                name="email"
-                type="email"
-                value={formik.values.email}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-              />
-              <FormHelperText sx={styles.inputHelperText}>
-                {formik.touched.email && formik.errors.email ? formik.errors.email : null}
-              </FormHelperText>
-            </FormControl>
-
-            <br /> <br />
-
-            <FormControl error={Boolean(formik.touched.password && formik.errors.password)} fullWidth>
-              <InputLabel sx={styles.inputLabel}>
-                Senha
-              </InputLabel>
-              <Input 
-                name="password"
-                type="password"
-                value={formik.values.password}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-              />
-              <FormHelperText sx={styles.inputHelperText}>
-                {formik.touched.password && formik.errors.password ? formik.errors.password : null}
-              </FormHelperText>
-            </FormControl>
-
-            <br /> <br />
-
-            <FormControl error={Boolean(formik.touched.passwordConf && formik.errors.passwordConf)} fullWidth>
-              <InputLabel sx={styles.inputLabel}>
-                Confirme a Senha
-              </InputLabel>
-              <Input 
-                name="passwordConf"
-                type="password"
-                value={formik.values.passwordConf}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-              />
-              <FormHelperText sx={styles.inputHelperText}>
-                {formik.touched.passwordConf && formik.errors.passwordConf ? formik.errors.passwordConf : null}
-              </FormHelperText>
-            </FormControl>
-
-            <Box>
-              {
-                formik.isSubmitting 
-                ? (
-                  <CircularProgress sx={styles.circularProgress} size={25} />
-                ) : (
-                  <Button 
-                    type="submit"
-                    variant='contained' 
-                    color='primary' 
-                    size="small"
-                    sx={styles.submitButton}
-                    fullWidth
-                    disabled={formik.isSubmitting}
-                  >
-                    Cadastrar
-                  </Button>
-                )
-              }              
-            </Box>
-          </Box>
-        </InternalContainer>
-      </form>
+      <InternalContainer maxWidth={'sm'}>
+        <WhiteBox>
+          <FormContent saveUser={handleSaveUser}/>
+        </WhiteBox>
+      </InternalContainer>
     </TemplateDefault>
   )
 }

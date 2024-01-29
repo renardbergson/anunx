@@ -1,11 +1,15 @@
-import { useTheme } from "@emotion/react"
-import { Container,Typography } from "@mui/material"
+'use client'
+import Link from 'next/link'
+import SearchBar from './SearchBar'
 
-const PageTitle = ({ title, subtitle, children }) => {
+import { useTheme } from "@emotion/react"
+import { Button, Container,Typography } from "@mui/material"
+
+const PageTitle = ({ title, subtitle, actionBtn, searchBar }) => {
   const theme = useTheme()
 
   return (
-    <Container maxWidth='sm' sx={{marginBottom: `${theme.spacing(7)}`}}>
+    <Container maxWidth='sm' sx={{marginBottom: `${theme.spacing(5)}`}}>
       <Typography component="h1" variant="h3" fontWeight="light" align="center">
         {title}
       </Typography>
@@ -14,7 +18,34 @@ const PageTitle = ({ title, subtitle, children }) => {
         {subtitle}
       </Typography>
 
-      {children}
+      {
+        actionBtn == true
+        ? (
+          <Link href="/pages/product/publish" 
+            style={{
+              textDecoration: 'none',
+              display: 'block',
+              width: 'fit-content',
+              margin: '0 auto'
+            }}
+          >
+            <Button 
+              variant='contained' 
+              color='primary' 
+              sx={{display: 'block', margin: '20px auto'}}
+            >
+              Publicar novo anúncio
+            </Button>
+          </Link>
+        ) : null
+      }
+
+      {
+        searchBar == true
+        ? (
+          <SearchBar placeholder={'Ex.: Iphone 13, 128gb, usado'}/>
+        ) : null
+      }
     </Container>
   )
 }
