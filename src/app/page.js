@@ -1,5 +1,5 @@
 import getSession from './utils/getSession'
-import getAds from './utils/getAds'
+import getHighlights from './utils/getHighlights'
 
 import TemplateDefault from './templates/Default'
 import PageTitle from './components/PageTitle'
@@ -9,7 +9,7 @@ import ProductGrid from './components/ProductGrid'
 
 const Home = async () => {
   const user = await getSession()
-  const ads = await getAds()
+  const highlights = await getHighlights()
 
   return (
     <TemplateDefault user={user}>
@@ -23,7 +23,7 @@ const Home = async () => {
       <Highlights />
 
       <InternalContainer>
-        <ProductGrid products={ads}/>
+        <ProductGrid products={highlights}/>
       </InternalContainer>
     </TemplateDefault>
   )

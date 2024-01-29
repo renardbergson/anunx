@@ -1,4 +1,6 @@
 import { useTheme } from "@emotion/react"
+import slugify from "slugify"
+import { useRouter } from "next/navigation"
 
 import {
   Card,
@@ -9,12 +11,19 @@ import {
   Typography
 } from "@mui/material"
 
-const ProductCard = ({ title, subtitle, image, description, actions }) => {
+const ProductCard = ({ id, category, title, subtitle, image, description, actions }) => {
   const theme = useTheme ()
+  const router = useRouter()
+
+  const _title = slugify(title).toLocaleLowerCase()
+  const _category = slugify(category).toLocaleLowerCase()
 
   return (
     <Grid item xs={12} sm={6} md={4}>
-      <Card sx={{borderRadius: '5px'}}>
+      <Card 
+        onClick={() => router.push(`/pages/product/${_category}/${_title}/${id}`)} 
+        sx={{borderRadius: '5px', cursor: 'pointer'}}
+      >
         <CardMedia
           sx={{ height: "230px", width: "100%" }}
           image={image}

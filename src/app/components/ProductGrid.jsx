@@ -59,6 +59,8 @@ const ProductGrid = ({ products, user, removeProduct }) => {
               return (
                 <ProductCard
                   key={product._id}
+                  id={product._id}
+                  category={product.category}
                   title={product.title}
                   subtitle={currencyFormat(product.price)}
                   image={`${process.env.NEXT_PUBLIC_BACK_END}/images/${product.images[0].name}`}
@@ -87,6 +89,8 @@ const ProductGrid = ({ products, user, removeProduct }) => {
             return (
               <ProductCard
                 key={product._id}
+                id={product._id}
+                category={product.category}
                 title={product.title}
                 subtitle={currencyFormat(product.price)}
                 image={`${process.env.NEXT_PUBLIC_BACK_END}/images/${product.images[0].name}`}
