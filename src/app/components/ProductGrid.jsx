@@ -1,14 +1,20 @@
 'use client'
 import { useState } from 'react'
+import { useTheme } from '@emotion/react'
+import useToast from '../contexts/Toast'
+import { useRouter } from "next/navigation"
 
 import ProductCard from './ProductCard'
 import Dialog from './Dialog'
 import {currencyFormat} from '../utils/currency'
-import useToast from '../contexts/Toast'
+import url_maker from '../utils/url_maker'
 
 import { Grid, Button, CardActions } from '@mui/material'
 
-const ProductGrid = ({ products, user, removeProduct }) => {
+const ProductGrid = ({ page, products, removeProduct }) => {
+  const theme = useTheme()
+  const router = useRouter()
+
   const [removedProducts, setRemovedProducts] = useState([])
 
   const [productID, setProductID] = useState()
@@ -55,46 +61,49 @@ const ProductGrid = ({ products, user, removeProduct }) => {
           products.map(product => {
             if (removedProducts.includes(product._id)) return null
 
-            if (user) {
-              return (
-                <ProductCard
-                  key={product._id}
-                  id={product._id}
-                  category={product.category}
-                  title={product.title}
-                  subtitle={currencyFormat(product.price)}
-                  image={`${process.env.NEXT_PUBLIC_BACK_END}/images/${product.images[0].name}`}
-                  description={product.description}
-                  actions={
-                    <>
-                      <CardActions disableSpacing>
-                        <Button size="small" sx={{fontSize: '0.8em'}}>
-                          Editar
-                        </Button>
-        
-                        <Button 
-                          size="small" 
-                          sx={{fontSize: '0.8em'}}
-                          onClick={() => handleClickRemove(product._id)}
-                        >
-                          Excluir
-                        </Button>
-                      </CardActions>
-                    </>
-                  }
-                />
-              )
-            }
-
             return (
               <ProductCard
                 key={product._id}
+                page={page}
                 id={product._id}
                 category={product.category}
                 title={product.title}
                 subtitle={currencyFormat(product.price)}
                 image={`${process.env.NEXT_PUBLIC_BACK_END}/images/${product.images[0].name}`}
                 description={product.description}
+                actions={
+                  <>
+                    <CardActions disableSpacing>
+                      <Button 
+                        variant='outlined' 
+                        size="small" 
+                        sx={{fontSize: '0.7em'}}
+                        onClick={
+                          () => router.push(`/pages/product/${url_maker(product.category)}/${url_maker(product.title)}/${product._id}`)
+                        }
+                      >
+                        Ver
+                      </Button>
+
+                      <Button 
+                        variant='outlined' 
+                        size="small" 
+                        sx={{fontSize: '0.7em', margin: `0 ${theme.spacing()}`}}
+                      >
+                        Editar
+                      </Button>
+      
+                      <Button 
+                        variant='outlined'
+                        size="small" 
+                        sx={{fontSize: '0.7em'}}
+                        onClick={() => handleClickRemove(product._id)}
+                      >
+                        Excluir
+                      </Button>
+                    </CardActions>
+                  </>
+                }
               />
             )
           })

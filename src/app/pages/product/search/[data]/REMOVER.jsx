@@ -1,7 +1,7 @@
 'use client'
 
 import { Typography, Grid } from "@mui/material"
-import ProductCard from '../../../components/ProductCard'
+import ProductCard from '../../../../components/ProductCard'
 
 const REMOVER = () => {
   return (

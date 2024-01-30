@@ -11,14 +11,11 @@ const Highlights = () => {
   const theme = useTheme()
 
   return (
-    <Box textAlign="center" sx={{marginBottom: theme.spacing(5)}}> 
+    <Box textAlign="center" sx={{marginTop: theme.spacing(-1) ,marginBottom: theme.spacing(5)}}> 
       <Typography
         component="h3"
         variant='h5'
-        sx={{
-          marginBottom: theme.spacing(3),
-          letterSpacing: '1px'
-        }}>         
+        sx={{letterSpacing: '1px'}}>         
           Destaques
         <AutoAwesomeIcon 
           fontSize='small' 

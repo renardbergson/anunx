@@ -35,8 +35,8 @@ const Dashboard = async () => {
         <InternalContainer>
           
           <ProductGrid 
+            page={'dashboard'}
             products={myProducts} 
-            user={user} 
             removeProduct={handleRemoveProduct}
           />
         

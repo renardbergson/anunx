@@ -3,6 +3,7 @@ import getHighlights from './utils/getHighlights'
 
 import TemplateDefault from './templates/Default'
 import PageTitle from './components/PageTitle'
+import SearchBar from './components/SearchBar'
 import Highlights from './components/Highlights'
 import InternalContainer from './partials/InternalContainer'
 import ProductGrid from './components/ProductGrid'
@@ -17,13 +18,16 @@ const Home = async () => {
       <PageTitle 
         title={'Bem-vindo ao Anunx!'} 
         subtitle={'O que está procurando?'} 
-        searchBar={true} 
       />
+
+      <InternalContainer maxWidth={'sm'}>
+        <SearchBar />
+      </InternalContainer>
       
       <Highlights />
 
       <InternalContainer>
-        <ProductGrid products={highlights}/>
+        <ProductGrid page={'home'} products={highlights}/>
       </InternalContainer>
     </TemplateDefault>
   )

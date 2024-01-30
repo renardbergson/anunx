@@ -5,7 +5,7 @@ import SearchBar from './SearchBar'
 import { useTheme } from "@emotion/react"
 import { Button, Container,Typography } from "@mui/material"
 
-const PageTitle = ({ title, subtitle, actionBtn, searchBar }) => {
+const PageTitle = ({ title, subtitle, actionBtn }) => {
   const theme = useTheme()
 
   return (
@@ -37,13 +37,6 @@ const PageTitle = ({ title, subtitle, actionBtn, searchBar }) => {
               Publicar novo anúncio
             </Button>
           </Link>
-        ) : null
-      }
-
-      {
-        searchBar == true
-        ? (
-          <SearchBar placeholder={'Ex.: Iphone 13, 128gb, usado'}/>
         ) : null
       }
     </Container>
