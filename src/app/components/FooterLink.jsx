@@ -2,12 +2,12 @@ import Link from "next/link"
 import { Grid, Typography } from "@mui/material"
 import { useTheme } from "@emotion/react"
 
-const FooterLink = ({ text }) => {
+const FooterLink = ({ text, link }) => {
   const theme = useTheme()
 
   return (
     <Grid item xs={6} sm={3} sx={{textAlign: 'center'}}>
-      <Link href="#" 
+      <Link href={link} 
         style={{
           textDecoration: 'none', 
           color: theme.palette.primary.main, 

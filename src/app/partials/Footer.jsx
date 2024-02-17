@@ -12,13 +12,13 @@ const Footer = () => {
       <Divider />
 
       <Grid container sx={{padding: `${theme.spacing(6)} 0`}} spacing={3}>
-        <FooterLink text={'Ajuda e Contato'}/>
+        <FooterLink text={'Quem Somos'} link={'/pages/about'}/>
 
-        <FooterLink text={'Dicas de Segurança'}/>
+        <FooterLink text={'Anunciar e Vender'} link={'/pages/product/publish'}/>
+        
+        <FooterLink text={'Dicas de Segurança'} link={'#'}/>
 
-        <FooterLink text={'Anunciar e Vender'}/>
-
-        <FooterLink text={'Plano Profissional'}/>
+        <FooterLink text={'Ajuda e Contato'} link={'#'}/>
       </Grid>
     </Container>
   )
