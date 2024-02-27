@@ -7,7 +7,7 @@ import { ThemeProvider } from '@mui/material'
 import { ToastProvider } from './contexts/Toast'
 
 export const metadata = {
-  title: 'Anunx - Negócios Online',
+  title: 'Anunx - Compra e Venda',
   description: 'A sua plataforma de compra e venda',
 }
 

@@ -16,7 +16,7 @@ const Footer = () => {
 
         <FooterLink text={'Anunciar e Vender'} link={'/pages/product/publish'}/>
         
-        <FooterLink text={'Dicas de Segurança'} link={'#'}/>
+        <FooterLink text={'Dicas de Segurança'} link={'/pages/security-tips'}/>
 
         <FooterLink text={'Ajuda e Contato'} link={'#'}/>
       </Grid>

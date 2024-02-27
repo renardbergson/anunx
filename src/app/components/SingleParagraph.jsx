@@ -8,7 +8,7 @@ const SingleParagraph = ({ text, marginBottom }) => {
   return (
     <Typography
       component='p'
-      variant='body2'
+      variant='body1'
       sx={marginBottom ? {marginBottom: theme.spacing(marginBottom)} : null}
     >
       {text}

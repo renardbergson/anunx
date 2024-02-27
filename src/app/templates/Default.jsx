@@ -13,7 +13,7 @@ const Default = ({children, user }) => {
     <Box style={{backgroundColor: theme.palette.background.default}}>
       <Header user={user} />
 
-      <Container sx={{padding: `${theme.spacing(7)} 0`, minHeight: '75vh'}}>
+      <Container sx={{padding: `${theme.spacing(7)} 0`, minHeight: '80vh'}}>
         {children}
       </Container>
 
